@@ -180,14 +180,7 @@ export const SacarTurnoCard = React.memo(({ doc, turnos, dates }) => {
             </IconButton>
           </Grid>
         </Box>
-        <Box sx={{}}>
-          <Typography
-            color="text.secondary"
-            sx={{ textAlign: "center", width: "100%" }}
-          >
-            (Los horarios corresponden a la hora local del especialista)
-          </Typography>
-        </Box>
+
       </Box>
     </div>
   );
