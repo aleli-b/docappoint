@@ -2,7 +2,7 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { CircularProgress, Grid, useMediaQuery } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 import axios from "axios";
 import { DoctorCard } from "../../components/DoctorCard/DoctorCard";
 import { FilterSideBar } from "../../components/FilterSideBar/FilterSideBar";
@@ -13,7 +13,7 @@ export const Especialistas = () => {
   const [doctors, setDoctors] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [occupiedTurnos, setOccupiedTurnos] = React.useState([]);
-  const isMobile = useMediaQuery("(max-width: 900px)");
+
   const svHost = import.meta.env.VITE_HOST;
 
   React.useEffect(() => {
@@ -26,85 +26,80 @@ export const Especialistas = () => {
     setDoctors(userData.data);
   };
 
-  const generateDates = () => {
-    const today = moment();
-    const daysOfWeekSpanish = [
-      "Domingo",
-      "Lunes",
-      "Martes",
-      "Miércoles",
-      "Jueves",
-      "Viernes",
-      "Sábado",
-    ];
-    const generatedDates = [];
-    let days = [];
 
-    const timeSlots = [];
-    const startTime = moment("08:00", "HH:mm");
-    const endTime = moment("13:00", "HH:mm");
-    const interval = moment.duration(1, "hours");
-    let isPast;
-    let i = 0;
 
-    const userLocalTime = moment().format("HH:mm");
+  // const generateDates = () => {
+  //   const today = moment();
+  //   const daysOfWeekSpanish = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+  //   const generatedDates = [];
+  //   let days = [];
 
-    const timer = [];
+  //   const timeSlots = [];
+  //   const startTime = moment('08:00', 'HH:mm');
+  //   const endTime = moment('13:00', 'HH:mm');
+  //   const interval = moment.duration(1, 'hours');
+  //   let isPast;
+  //   let i = 0;
 
-    while (startTime <= endTime) {
-      timer.push(startTime.format("HH:mm"));
+  //   const userLocalTime = moment().format('HH:mm');
 
-      isPast = String(userLocalTime) > timer[i] ? true : false;
+  //   const timer = [];
 
-      const timeSlotObj = {
-        time: timer[i],
-        isPast: isPast,
-      };
+  //   while (startTime <= endTime) {
+  //     timer.push(startTime.format('HH:mm'));
 
-      timeSlots.push(timeSlotObj);
-      startTime.add(interval);
-      i++;
-    }
+  //     isPast = String(userLocalTime) > timer[i] ? true : false;
 
-    for (let i = 0; i < 30; i++) {
-      const date = today.clone().add(i, "days");
-      const formattedDate = date.format("DD [de] MMMM");
-      const dayOfWeek = daysOfWeekSpanish[date.day()];
-      // days.push({day: formattedDate});
-      // isPast = date.isBefore(moment()); // Compare entire date and time
+  //     const timeSlotObj = {
+  //       time: timer[i],
+  //       isPast: isPast,
+  //     }
 
-      let label;
-      if (i === 0) {
-        label = "Hoy";
-      } else if (i === 1) {
-        label = "Mañana";
-      } else {
-        label = dayOfWeek;
-      }
+  //     timeSlots.push(timeSlotObj);
+  //     startTime.add(interval);
+  //     i++
+  //   }
 
-      generatedDates.push({ label, day: formattedDate, time: timeSlots });
-    }
-    days = generatedDates.map((date) => moment(date.day, "DD [de] MMMM"));
-    const isDayPast = days.map((day) => day.isBefore(moment()));
+  //   for (let i = 0; i < 30; i++) {
+  //     const date = today.clone().add(i, 'days');
+  //     const formattedDate = date.format('DD [de] MMMM');
+  //     const dayOfWeek = daysOfWeekSpanish[date.day()];
+  //     // days.push({day: formattedDate});
+  //     // isPast = date.isBefore(moment()); // Compare entire date and time
 
-    generatedDates.forEach((date, index) => {
-      date.isDayPast = isDayPast[index];
-    });
+  //     let label;
+  //     if (i === 0) {
+  //       label = 'Hoy';
+  //     } else if (i === 1) {
+  //       label = 'Mañana';
+  //     } else {
+  //       label = dayOfWeek;
+  //     }
 
-    return generatedDates;
-  };
+  //     generatedDates.push({ label, day: formattedDate, time: timeSlots, });
+  //   }
+  //   days = generatedDates.map(date => moment(date.day, 'DD [de] MMMM'));
+  //   const isDayPast = days.map(day => day.isBefore(moment()));
 
-  const dates = generateDates();
+  //   generatedDates.forEach((date, index) => {
+  //     date.isDayPast = isDayPast[index];
+  //   });
+
+  //   return generatedDates;
+  // };
+
+  // const dates = generateDates();
 
   const handleCategoryChange = async (category, province) => {
     try {
       setLoading(true);
-      if (category === "" && province === "") {
+      if (category === "" && province === '') {
         getDoctors();
       } else {
-        const response = await axios.get(`${svHost}/users/filter`, {
-          params: { category, province },
-        });
+        const response = await axios.get(
+          `${svHost}/users/filter`,
+          { params: { category, province } }
+      );
         setDoctors(response.data);
       }
     } catch (error) {
@@ -135,76 +130,59 @@ export const Especialistas = () => {
   return (
     <>
       <CssBaseline />
-      <Box
-        className="body"
+      <Grid
+        container
         sx={{
           display: "flex",
           minHeight: "100vh",
-          width: "100%",
           padding: 4,
           justifyContent: "center",
+          flexDirection: { xs: "column", md: "row" },
         }}
+        spacing={2}
       >
-        <Box
-          className="Container"
-          sx={{
-            width: "100%",
-            display: "flex",
-            flexDirection: isMobile ? "column" : "row",
-            gap: 2,
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              width: isMobile ? "100vwd" : "15%",
-            }}
-          >
-            <FilterSideBar handleCategoryChange={handleCategoryChange} />
-          </Box>
-          <Box
-            id="doctor-container"
-            sx={{ width: isMobile ? "100vwd" : "90%" }}
-          >
-            {loading ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "16px",
-                }}
-              >
-                <CircularProgress />
-              </Box>
-            ) : (
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  flexWrap: "wrap",
-                  gap: 2,
-                  borderRadius: "12px",
-                }}
-              >
-                {doctors.length > 0 ? (
-                  doctors.map((doctor) => (
-                    <DoctorCard
-                      key={doctor.id}
-                      doctor={doctor}
-                      turnos={occupiedTurnos}
-                      dates={dates}
-                    />
-                  ))
-                ) : (
-                  <Typography variant="body1">
-                    No se encontraron doctores en esta categoría.
-                  </Typography>
-                )}
-              </Box>
-            )}
-          </Box>
-        </Box>
-      </Box>
+        <Grid item xs={12} md={2}>
+          <FilterSideBar handleCategoryChange={handleCategoryChange} />
+        </Grid>
+        <Grid item sx={{}} id="doctor-container" xs={12} md={10}>
+          {loading ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "16px",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                gap: 2,
+                borderRadius: "12px",
+              }}
+            >
+              {doctors.length > 0 ? (
+                doctors.map((doctor) => (
+                  <DoctorCard
+                    key={doctor.id}
+                    doctor={doctor}
+                    turnos={occupiedTurnos}
+                    
+                  />
+                ))
+              ) : (
+                <Typography variant="body1">
+                  No se encontraron doctores en esta categoría.
+                </Typography>
+              )}
+            </Box>
+          )}
+        </Grid>
+      </Grid>
     </>
   );
 };
