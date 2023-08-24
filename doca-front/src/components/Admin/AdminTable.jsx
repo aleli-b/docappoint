@@ -23,25 +23,25 @@ export const AdminTable = ({ users, handleUserBanState, handleUserVerifyState })
   }, []);
 
   const columns = [
-    { field: "firstName", headerName: "Nombre", width: 200 },
-    { field: "lastName", headerName: "Apellido", width: 200 },
-    {
-      field: "age",
-      headerName: "Edad",
-      width: 200,
-    },
     {
       field: "fullName",
       headerName: "Nombre Completo",
-      description: "This column has a value getter and is not sortable.",
+      description: "Ésta columna no es ordenable.",
       sortable: false,
       width: 200,
       valueGetter: (params) =>
         `${params.row.firstName || ""} ${params.row.lastName || ""}`,
     },
+    {
+      field: "age",
+      headerName: "Fecha de nacimiento",
+      width: 200,
+    },
+
     { field: "admin", headerName: "Administrador", width: 200 },
     { field: "userType", headerName: "Tipo de Usuario", width: 200 },
     { field: "category", headerName: "Especialidad", width: 200 },
+    { field: "clabeBancaria", headerName: "Clabe bancaria", width: 200 },
     {
       field: "cedula", headerName: "Cédula", width: 200, renderCell: (params) => (
         <Box>
@@ -96,6 +96,7 @@ export const AdminTable = ({ users, handleUserBanState, handleUserVerifyState })
     lastName: user.lastName,
     firstName: user.name,
     age: user.age,
+    clabeBancaria: user.userType === "doctor" ? user.clabe : "-",
     cedula: user.cedula_url,
     verificacion: user.userType === "doctor"
       ? user.cedulaVerified === false

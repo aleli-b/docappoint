@@ -31,15 +31,12 @@ export const FilterSideBar = ({ handleCategoryChange }) => {
   const options = [
     "Anestesiología",
     "Cardiología",
-    "Cardiólogo",
     "Cirugía",
     "Dermatología",
     "Endocrinología",
-    "Endocrinólogo",
     "Gastroenterología",
     "Gineco obstetricia",
     "Infectología",
-    "Infectólogo",
     "Medicina Familiar",
     "Medicina General",
     "Medicina Intensiva",
@@ -53,8 +50,7 @@ export const FilterSideBar = ({ handleCategoryChange }) => {
     "Oncología",
     "Ortopédico",
     "Otorrinolaringología",
-    "Otorrinolaringólogo",
-    "Odontólogo",
+    "Odontología",
     "Patología",
     "Pediatría",
     "Psiquiatría",
@@ -73,8 +69,7 @@ export const FilterSideBar = ({ handleCategoryChange }) => {
         position: { xs: "inherit", md: "sticky" },
         top: "15px",
         gap: 2,
-        height:"fit-content"
-        
+        height: "fit-content",
       }}
     >
       <Typography variant="p">Filtrar Por:</Typography>

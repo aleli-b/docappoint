@@ -175,6 +175,7 @@ export const Consultas = () => {
                     backgroundColor: "#838383",
                     padding: 4,
                     borderRadius: "10px",
+                    maxHeight: "2rem"
                   }}
                 >
                   {isMobile ? (

@@ -39,11 +39,11 @@ export const RegisterFormDoc = () => {
   const [passwordMatchError, setPasswordMatchError] = React.useState(false);
   const isMobile = useMediaQuery("(max-width:600px)");
   const auth = useAuth();
-  const [type, setType] = React.useState('text')
+  const [type, setType] = React.useState("text");
 
   const handleType = () => {
-    setType("date")
-  }
+    setType("date");
+  };
 
   const getPasswordStrength = (value) => {
     if (value.length < 8) {
@@ -100,37 +100,33 @@ export const RegisterFormDoc = () => {
   };
 
   const options = [
-    'Anestesiología',
-    'Cardiología',
-    'Cardiólogo',
-    'Cirugía',
-    'Dermatología',
-    'Endocrinología',
-    'Endocrinólogo',
-    'Gastroenterología',
-    'Gineco obstetricia',
-    'Infectología',
-    'Infectólogo',
-    'Medicina Familiar',
-    'Medicina General',
-    'Medicina Intensiva',
-    'Medicina del Estilo de Vida',
-    'Medicina física y rehabilitación',
-    'Médicina Interna',
-    'Neumología',
-    'Neurología',
-    'Nefrología',
-    'Oftalmología',
-    'Oncología',
-    'Ortopédico',
-    'Otorrinolaringología',
-    'Otorrinolaringólogo',
-    'Odontólogo',
-    'Patología',
-    'Pediatría',
-    'Psiquiatría',
-    'Radiología',
-    'Urología',
+    "Anestesiología",
+    "Cardiología",
+    "Cirugía",
+    "Dermatología",
+    "Endocrinología",
+    "Gastroenterología",
+    "Gineco obstetricia",
+    "Infectología",
+    "Medicina Familiar",
+    "Medicina General",
+    "Medicina Intensiva",
+    "Medicina del Estilo de Vida",
+    "Medicina física y rehabilitación",
+    "Médicina Interna",
+    "Neumología",
+    "Neurología",
+    "Nefrología",
+    "Oftalmología",
+    "Oncología",
+    "Ortopédico",
+    "Otorrinolaringología",
+    "Odontología",
+    "Patología",
+    "Pediatría",
+    "Psiquiatría",
+    "Radiología",
+    "Urología",
   ];
 
   return (
@@ -157,7 +153,7 @@ export const RegisterFormDoc = () => {
         >
           Registrarse como Doctor
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, }}>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <FormControl fullWidth margin="normal">
             <InputLabel id="category-label">Especialidad</InputLabel>
             <Select
@@ -217,7 +213,10 @@ export const RegisterFormDoc = () => {
               mb: 3,
             }}
           />
-          <FormControl fullWidth sx={{ bgcolor: "rgba(131, 131, 131, 0.22)", mb: 3 }}>
+          <FormControl
+            fullWidth
+            sx={{ bgcolor: "rgba(131, 131, 131, 0.22)", mb: 3 }}
+          >
             <InputLabel htmlFor="countrySelect">País</InputLabel>
             <Select
               value="Mexico"

@@ -28,6 +28,8 @@ export const Footer = () => {
         width: "100%",
         margin: "0 auto",
         bgcolor: "#145C6C!important",
+        pl: isMobile? 0:3,
+        pr: isMobile? 0:3
       }}
       id="footerNav"
     >
