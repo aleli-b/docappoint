@@ -10,6 +10,7 @@ import './styles.css'
 import { Mensajeria } from '../../../components/Mensajeria/Mensajeria';
 import { UploadImage } from '../../UploadImage/UploadImage';
 import { UploadCed } from '../../../components/Upload/UploadCed/UploadCed';
+import { TimeSlotForm } from '../../../components/TimeSlotForm/TimeSlotForm';
 
 export const PerfilDoctores = () => {
     const { user, editUser } = useAuth();
@@ -128,7 +129,7 @@ export const PerfilDoctores = () => {
                                     </Button>
                                 </Box>
                             </Box>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '18.7px' }}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', borderBottom: 'solid gray 1px', padding: '18.7px' }}>
                                 <Typography>CLABE interbancaria:</Typography>
                                 <Box>
                                     {user.clabe ? user.clabe : 'No has añadido una CLABE aún'}
@@ -141,6 +142,20 @@ export const PerfilDoctores = () => {
                                     </Button>
                                 </Box>
                             </Box>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '18.7px' }}>
+                                <Typography>Nombre del banco:</Typography>
+                                <Box>
+                                    {user.bank ? user.bank : 'No has añadido un banco aún'}
+                                    <Button onClick={() => {
+                                        setFieldToEdit('bank');
+                                        setNewValue(user.bank || '');
+                                        setEditing(true);
+                                    }}>
+                                        <EditIcon />
+                                    </Button>
+                                </Box>
+                            </Box>
+                            <TimeSlotForm />
                         </CardContent>
                     </Card>
                 </Grid>

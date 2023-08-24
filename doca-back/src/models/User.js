@@ -72,6 +72,10 @@ module.exports = (sequelize) => {
                 type: DataTypes.BIGINT,
                 allowNull: true,
             },
+            bank: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
             subscription: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false,
@@ -132,6 +136,21 @@ module.exports = (sequelize) => {
             },
             price: {
                 type: DataTypes.INTEGER,
+                allowNull: true,
+                defaultValue: null,
+            },
+            startTime: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: null,
+            },
+            endTime: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: null,
+            },
+            interval: {
+                type: DataTypes.STRING,
                 allowNull: true,
                 defaultValue: null,
             },
