@@ -1,4 +1,4 @@
-import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, Typography, useMediaQuery } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -43,6 +43,7 @@ export const SacarTurnoCard = React.memo(({ doc, turnos, dates }) => {
   const [startIndex, setStartIndex] = useState(0);
   const [numColumns, setNumColumns] = useState(4);
 
+  const isMobile = useMediaQuery('(max-width: 900px)')
   const auth = useAuth();
   const doctor = doc;
   const occupiedTurnos = turnos;
@@ -109,13 +110,13 @@ export const SacarTurnoCard = React.memo(({ doc, turnos, dates }) => {
     <div>
       <Box
         className="Container"
-        sx={{ display: "flex", flexDirection: "column", width: "100%"}}
+        sx={{ display: "flex", flexDirection: "column", width: "100%",overflowY: isMobile? "none": "auto"}}
       >
         <Box className="gridTurnos">
           <Grid
             container
             spacing={2}
-            sx={{ display: "flex", flexWrap: "nowrap" }}
+            sx={{ display: "flex", flexWrap: "nowrap",  }}
           >
             <IconButton
               onClick={handlePrevClick}
@@ -130,7 +131,7 @@ export const SacarTurnoCard = React.memo(({ doc, turnos, dates }) => {
                 xs={12}
                 md={3}
                 key={i}
-                sx={{ display: "flex", flexDirection: "column" }}
+                sx={{ display: "flex", flexDirection: "column",}}
               >
                 <Typography component="div">{date.label}</Typography>
                 <Typography
@@ -143,7 +144,7 @@ export const SacarTurnoCard = React.memo(({ doc, turnos, dates }) => {
                 </Typography>
                 {date.time.length > 0 && (
                   <Box
-                    sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+                    sx={{ display: "flex", flexDirection: "column", gap: 2,  maxHeight:"39vh", overflowY: isMobile? "scroll": "none"}}
                   >
                     {date.time.map((time, j) => (
                       <Button

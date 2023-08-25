@@ -256,9 +256,7 @@ export function TurnoCheckOut({ doctor, turno }) {
               fontSize: "1.75rem",
               fontWeight: "Bold",
             }}
-          >{`Total a Pagar: ${doctor.price}${
-            doctor.price ? "USD" : ""
-          }`}</Typography>
+          >{doctor.price? `Total a pagar ${doctor.price}` : "No se ha determinado un precio aún"}</Typography>
           <Button
             sx={{
               borderRadius: "0.625rem",
@@ -273,10 +271,11 @@ export function TurnoCheckOut({ doctor, turno }) {
             variant="contained"
             color="primary"
             onClick={() => createPreference()}
+            disabled={!doctor.price}
           >
             <Typography
               variant="h6"
-              sx={{ fontFamily: "work sans", fontWeight: "bold" }}
+              sx={{ fontFamily: "work sans", fontWeight: "bold",}}
             >
               Pagar
             </Typography>
