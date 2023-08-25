@@ -176,7 +176,7 @@ export function TurnoCheckOut({ doctor, turno }) {
                   fontWeight: "700",
                 }}
               >
-                {`Dr. ${doctor.name} ${doctor.lastName}`}
+                {`Dr/Dra ${doctor.name} ${doctor.lastName}`}
               </Typography>
               <Typography
                 variant="h1"
@@ -256,7 +256,7 @@ export function TurnoCheckOut({ doctor, turno }) {
               fontSize: "1.75rem",
               fontWeight: "Bold",
             }}
-          >{doctor.price? `Total a pagar ${doctor.price}` : "No se ha determinado un precio aún"}</Typography>
+          >{doctor.price? `Total a pagar $${doctor.price} MXN` : "No se ha determinado un precio aún"}</Typography>
           <Button
             sx={{
               borderRadius: "0.625rem",
