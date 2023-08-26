@@ -121,7 +121,7 @@ module.exports = (sequelize) => {
                     'Nefrología',
                     'Oftalmología',
                     'Oncología',
-                    'Ortopédico',
+                    'Ortopedia y Traumatología',
                     'Otorrinolaringología',
                     'Otorrinolaringólogo',
                     'Odontólogo',

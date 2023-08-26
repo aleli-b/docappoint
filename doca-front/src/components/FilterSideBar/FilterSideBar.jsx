@@ -48,7 +48,7 @@ export const FilterSideBar = ({ handleCategoryChange }) => {
     "Nefrología",
     "Oftalmología",
     "Oncología",
-    "Ortopédico",
+    "Ortopedia y Traumatología",
     "Otorrinolaringología",
     "Odontología",
     "Patología",

@@ -130,13 +130,13 @@ export const Plan = () => {
                 color: "white",
                 fontWeight: "bold",
                 fontSize: "1.25rem",
-                width: "14rem",
+                width: "fit-content",
                 height: "2rem",
                 boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                 fontFamily: "work sans",
               }}
             >
-              SÓLO POR AGOSTO
+              SÓLO POR SEPTIEMBRE
             </Typography>
           </Box>
           <Box
@@ -176,7 +176,7 @@ export const Plan = () => {
             >
               {"12 MESES + MES DE "}
               {<br />}
-              {"AGOSTO GRATIS"}
+              {"SEPTIEMBRE GRATIS"}
             </Typography>
             <Box
               sx={{
@@ -235,13 +235,13 @@ export const Plan = () => {
                 color: "white",
                 fontWeight: "bold",
                 fontSize: "1.25rem",
-                width: "14rem",
+                width: "fit-content",
                 height: "2rem",
                 boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                 fontFamily: "work sans",
               }}
             >
-              SÓLO POR AGOSTO
+              SOLO POR SEPTIEMBRE
             </Typography>
           </Box>
           <Box
@@ -279,9 +279,9 @@ export const Plan = () => {
               }}
               variant="body1"
             >
-              {"SEPTIEMBRE + OCTUBRE "}
+              {"OCTUBRE + NOVIEMBRE "}
               {<br />}
-              {"+ MES DE AGOSTO GRATIS"}
+              {"+ MES DE SEPTIEMBRE GRATIS"}
             </Typography>
 
             <Box
@@ -347,7 +347,7 @@ export const Plan = () => {
                 boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
               }}
             >
-              SÓLO POR AGOSTO
+              SÓLO POR SEPTIEMBRE
             </Typography>
           </Box>
           <Box

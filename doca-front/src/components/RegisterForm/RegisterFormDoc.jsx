@@ -119,7 +119,7 @@ export const RegisterFormDoc = () => {
     "Nefrología",
     "Oftalmología",
     "Oncología",
-    "Ortopédico",
+    "Ortopedia y Traumatología",
     "Otorrinolaringología",
     "Odontología",
     "Patología",
