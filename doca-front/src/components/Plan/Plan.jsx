@@ -130,10 +130,12 @@ export const Plan = () => {
                 color: "white",
                 fontWeight: "bold",
                 fontSize: "1.25rem",
-                width: "fit-content",
                 height: "2rem",
                 boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                 fontFamily: "work sans",
+                width: "auto",
+                pl: 2,
+                pr: 2,
               }}
             >
               SÓLO POR SEPTIEMBRE
@@ -170,7 +172,7 @@ export const Plan = () => {
                 fontWeight: "bold",
                 fontFamily: "work sans",
                 fontSize: "1.5rem",
-                textAlign:"center"
+                textAlign: "center",
               }}
               variant="body1"
             >
@@ -235,13 +237,15 @@ export const Plan = () => {
                 color: "white",
                 fontWeight: "bold",
                 fontSize: "1.25rem",
-                width: "fit-content",
+                width: "auto",
                 height: "2rem",
                 boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                 fontFamily: "work sans",
+                pl: 2,
+                pr: 2,
               }}
             >
-              SOLO POR SEPTIEMBRE
+              SÓLO POR SEPTIEMBRE
             </Typography>
           </Box>
           <Box
@@ -342,9 +346,11 @@ export const Plan = () => {
                 color: "white",
                 fontWeight: "bold",
                 fontSize: "1.25rem",
-                width: "14rem",
                 height: "2rem",
                 boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                width: "auto",
+                pl: 2,
+                pr: 2,
               }}
             >
               SÓLO POR SEPTIEMBRE
