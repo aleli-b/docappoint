@@ -71,7 +71,7 @@ export function TurnoCheckOut({ doctor, turno }) {
           display: "flex",
           flexDirection: "column",
           bgcolor: "rgba(131, 131, 131, 0.22)",
-          p: 4,
+          p:4,
           width: "100%",
           borderRadius: 5,
           gap: 4,
@@ -97,7 +97,7 @@ export function TurnoCheckOut({ doctor, turno }) {
             flexDirection: isMobile?"column":"row",
             gap: isMobile ? 2 : "",
             justifyContent: "space-evenly",
-            width: isMobile?"100dvw":"90%",
+            width: isMobile?"100%":"90%",
           }}
         >
           <Box
@@ -108,7 +108,7 @@ export function TurnoCheckOut({ doctor, turno }) {
               alignContent: "center",
               textAlign: "center",
               gap: 2,
-              width: isMobile? "100dvw":"40dvw",
+              width: isMobile? "100%":"40dvw",
               alignItems: "center",
             }}
           >
@@ -167,7 +167,7 @@ export function TurnoCheckOut({ doctor, turno }) {
               flexDirection: "column",
               alignContent: "center",
               gap: 1,
-              width: isMobile? "100dvw": "38dvw",
+              width: isMobile? "100%": "38dvw",
               pt: isMobile ? "" : doctor.profile_picture_url ? "5dvh" : "",
             }}
           >
