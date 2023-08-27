@@ -9,6 +9,8 @@ import {
   Avatar,
   SvgIcon,
   Rating,
+  Icon,
+  CardMedia,
 } from "@mui/material";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
@@ -82,7 +84,7 @@ export function TurnoCheckOut({ doctor, turno }) {
             color: "#5F5F5F",
             textAlign: isMobile ? "center" : "left",
             fontFamily: "Work Sans",
-            fontSize: "2rem",
+            fontSize: "1.75rem",
             fontWeight: "bold",
           }}
         >
@@ -92,10 +94,10 @@ export function TurnoCheckOut({ doctor, turno }) {
           className="boxContainer"
           sx={{
             display: "flex",
-            flexDirection: "row",
-            gap: isMobile ? 1 : "",
+            flexDirection: isMobile?"column":"row",
+            gap: isMobile ? 2 : "",
             justifyContent: "space-evenly",
-            width: "100%",
+            width: isMobile?"100dvw":"90%",
           }}
         >
           <Box
@@ -106,49 +108,56 @@ export function TurnoCheckOut({ doctor, turno }) {
               alignContent: "center",
               textAlign: "center",
               gap: 2,
-              width: "40dvw",
+              width: isMobile? "100dvw":"40dvw",
               alignItems: "center",
             }}
           >
             <Box
               className="imgProfile"
               sx={{
-                width: isMobile ? "100%" : "50%",
+                width:  isMobile? "100%":"50%",
+                maxHeight:   isMobile? "flex-start":"100%",
                 display: "flex",
-                justifyContent: "center",
-                alignContent: "center",
+                justifyContent: isMobile? "flex-start":"center",
+                alignItems: "center",
               }}
             >
-              <Avatar
+              <CardMedia
+                component="img"
                 alt="img"
                 sx={{
-                  width: "100%",
-                  height: "100%",
-                  justifyContent: "center",
-                  borderRadius: "5rem",
+                  width:"100%",
+                  height:"auto",
+                  objectFit:"contain",
+                  aspectRatio:"1/1",
+                  
                 }}
-                srcSet={
+                image={
                   doctor.profile_picture_url ? doctor.profile_picture_url : ""
                 }
               />
             </Box>
-            {!isMobile? (<Typography
-              variant="h1"
-              sx={{
-                color: "#fff",
-                textAlign: "center",
-                fontFamily: "Work Sans",
-                fontSize: "1.25rem",
-                fontWeight: "700",
-                bgcolor: "#838383",
-                p: 2,
-                borderRadius: 5,
-                boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                width: isMobile ? "100%" : "50%",
-              }}
-            >
-              {turno ? `${turno}hs` : ""}
-            </Typography>) : ""}
+            {!isMobile ? (
+              <Typography
+                variant="h1"
+                sx={{
+                  color: "#fff",
+                  textAlign: "center",
+                  fontFamily: "Work Sans",
+                  fontSize: "1.25rem",
+                  fontWeight: "700",
+                  bgcolor: "#838383",
+                  p: 2,
+                  borderRadius: 5,
+                  boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                  width: isMobile ? "100%" : "50%",
+                }}
+              >
+                {turno ? `${turno}hs` : ""}
+              </Typography>
+            ) : (
+              ""
+            )}
           </Box>
 
           <Box
@@ -156,18 +165,17 @@ export function TurnoCheckOut({ doctor, turno }) {
             sx={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
               alignContent: "center",
               gap: 1,
-              width: isMobile? "45dvw":"38dvw",
-
+              width: isMobile? "100dvw": "38dvw",
+              pt: isMobile ? "" : doctor.profile_picture_url ? "5dvh" : "",
             }}
           >
             <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "flex-start",
+                alignItems: isMobile? "center":"flex-start",
                 gap: 2,
               }}
             >
@@ -177,7 +185,7 @@ export function TurnoCheckOut({ doctor, turno }) {
                   color: "#5F5F5F",
                   textAlign: isMobile ? "center" : "left",
                   fontFamily: "Work Sans",
-                  fontSize: isMobile? "1.5rem":"1.75rem",
+                  fontSize: isMobile ? "1.5rem" : "1.75rem",
                   fontWeight: "700",
                 }}
               >
@@ -192,7 +200,7 @@ export function TurnoCheckOut({ doctor, turno }) {
                   color: "#5F5F5F",
                   textAlign: isMobile ? "center" : "left",
                   fontFamily: "Work Sans",
-                  fontSize: isMobile? "1.2rem":"1.25rem",
+                  fontSize: isMobile ? "1.2rem" : "1.25rem",
                   fontWeight: "700",
                 }}
               >
@@ -216,10 +224,15 @@ export function TurnoCheckOut({ doctor, turno }) {
                   </SvgIcon>
                 )}
               </Typography>
-              <Box sx={{width:isMobile? "100%":"auto", display:"flex", justifyContent:"center"}}>
+              <Box
+                sx={{
+                  width: isMobile ? "100%" : "auto",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
                 <Valoraciones doctorId={doctor.id} />
               </Box>
-              
             </Box>
 
             {/*
@@ -229,23 +242,27 @@ export function TurnoCheckOut({ doctor, turno }) {
             </Box>*/}
           </Box>
         </Box>
-        {isMobile? (<Typography
-              variant="h1"
-              sx={{
-                color: "#fff",
-                textAlign: "center",
-                fontFamily: "Work Sans",
-                fontSize: "1.25rem",
-                fontWeight: "700",
-                bgcolor: "#838383",
-                p: 2,
-                borderRadius: 5,
-                boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                width: isMobile ? "100%" : "50%",
-              }}
-            >
-              {turno ? `${turno}hs` : ""}
-            </Typography>) : ""}
+        {isMobile ? (
+          <Typography
+            variant="h1"
+            sx={{
+              color: "#fff",
+              textAlign: "center",
+              fontFamily: "Work Sans",
+              fontSize: "1.25rem",
+              fontWeight: "700",
+              bgcolor: "#838383",
+              p: 2,
+              borderRadius: 5,
+              boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+              width: isMobile ? "100%" : "50%",
+            }}
+          >
+            {turno ? `${turno}hs` : ""}
+          </Typography>
+        ) : (
+          ""
+        )}
         <Box
           sx={{
             width: "100%",
@@ -264,7 +281,11 @@ export function TurnoCheckOut({ doctor, turno }) {
               fontSize: "1.75rem",
               fontWeight: "Bold",
             }}
-          >{doctor.price? `Total a pagar $${doctor.price} MXN` : "No se ha determinado un precio aún"}</Typography>
+          >
+            {doctor.price
+              ? `Total a pagar $${doctor.price} MXN`
+              : "No se ha determinado un precio aún"}
+          </Typography>
           <Button
             sx={{
               borderRadius: "0.625rem",
@@ -283,7 +304,7 @@ export function TurnoCheckOut({ doctor, turno }) {
           >
             <Typography
               variant="h6"
-              sx={{ fontFamily: "work sans", fontWeight: "bold",}}
+              sx={{ fontFamily: "work sans", fontWeight: "bold" }}
             >
               Pagar
             </Typography>
