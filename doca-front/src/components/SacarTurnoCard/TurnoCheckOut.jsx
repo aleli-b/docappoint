@@ -89,6 +89,7 @@ export function TurnoCheckOut({ doctor, turno }) {
           Detalle de la consulta
         </Typography>
         <Box
+          className="boxContainer"
           sx={{
             display: "flex",
             flexDirection: "row",
@@ -98,17 +99,19 @@ export function TurnoCheckOut({ doctor, turno }) {
           }}
         >
           <Box
+            className="boxLeft"
             sx={{
               display: "flex",
               flexDirection: "column",
               alignContent: "center",
               textAlign: "center",
               gap: 2,
-              width: "50%",
+              width: "40dvw",
               alignItems: "center",
             }}
           >
             <Box
+              className="imgProfile"
               sx={{
                 width: isMobile ? "100%" : "50%",
                 display: "flex",
@@ -144,18 +147,20 @@ export function TurnoCheckOut({ doctor, turno }) {
                 width: isMobile ? "100%" : "50%",
               }}
             >
-              {turno ? `${turno}` : ""}
+              {turno ? `${turno}hs` : ""}
             </Typography>) : ""}
           </Box>
 
           <Box
+            className="boxRight"
             sx={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
               alignContent: "center",
               gap: 1,
-              width: "55vwd",
+              width: isMobile? "45dvw":"38dvw",
+
             }}
           >
             <Box
@@ -172,7 +177,7 @@ export function TurnoCheckOut({ doctor, turno }) {
                   color: "#5F5F5F",
                   textAlign: isMobile ? "center" : "left",
                   fontFamily: "Work Sans",
-                  fontSize: "1.75rem",
+                  fontSize: isMobile? "1.5rem":"1.75rem",
                   fontWeight: "700",
                 }}
               >
@@ -187,7 +192,7 @@ export function TurnoCheckOut({ doctor, turno }) {
                   color: "#5F5F5F",
                   textAlign: isMobile ? "center" : "left",
                   fontFamily: "Work Sans",
-                  fontSize: "1.25rem",
+                  fontSize: isMobile? "1.2rem":"1.25rem",
                   fontWeight: "700",
                 }}
               >
@@ -211,7 +216,10 @@ export function TurnoCheckOut({ doctor, turno }) {
                   </SvgIcon>
                 )}
               </Typography>
-              <Valoraciones doctorId={doctor.id} />
+              <Box sx={{width:isMobile? "100%":"auto", display:"flex", justifyContent:"center"}}>
+                <Valoraciones doctorId={doctor.id} />
+              </Box>
+              
             </Box>
 
             {/*
