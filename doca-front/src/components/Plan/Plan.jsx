@@ -20,10 +20,10 @@ export const Plan = () => {
   const mpKey = import.meta.env.VITE_MP_KEY;
   initMercadoPago(mpKey);
 
-  const createPreference = async (price) => {
+  const createPreference = async (price, time) => {
     if (user) {
       axios
-        .post(`${svHost}/mpcheckoutSubscription`, { user: user, price: price })
+        .post(`${svHost}/mpcheckoutSubscription`, { user: user, price: price, time: time})
         .then(
           (response) =>
             (window.location.href = response.data.response.body.init_point)
@@ -204,7 +204,7 @@ export const Plan = () => {
             </Box>
             <Button
               variant="contained"
-              onClick={() => createPreference(10000)}
+              onClick={() => createPreference(10000,13)}
               sx={{
                 marginTop: 1,
                 minWidth: "100%",
@@ -312,7 +312,7 @@ export const Plan = () => {
             </Box>
             <Button
               variant="contained"
-              onClick={() => createPreference(10000)}
+              onClick={() => createPreference(1499,3)}
               sx={{
                 marginTop: 1,
                 minWidth: "100%",
@@ -416,7 +416,7 @@ export const Plan = () => {
             </Box>
             <Button
               variant="contained"
-              onClick={() => createPreference(999)}
+              onClick={() => createPreference(999,1)}
               sx={{
                 marginTop: 1,
                 minWidth: "100%",

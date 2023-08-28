@@ -5,6 +5,8 @@ const mercadopago = require("mercadopago");
 const { User } = require("../db");
 const axios = require("axios");
 const { setPago } = require("../controllers/pagos.controller");
+const { setSubscriptions } = require("./subscription.controller");
+
 const MpAccessToken = process.env.MpAccessToken;
 mercadopago.configure({
   access_token: MpAccessToken,
@@ -39,12 +41,11 @@ async function setPreferences(req, res) {
 
 //Esta función se encarga de crear el id de Referencia para que se genere el checkout de MP
 async function setPreferencesSubscription(req, res) {
-  const { user, price } = req.body;
-
+  const { user, price, time} = req.body;
   let preference = {
     items: [
       {
-        title: "Subscripción",
+        title: `Subscripción por ${time > 1 ? `${time} meses` : `${time} mes`} `,
         unit_price: Number(price),
         quantity: 1,
         currency_id: "ARS",
@@ -52,7 +53,7 @@ async function setPreferencesSubscription(req, res) {
     ],
     external_reference: user.id,
     back_urls: {
-      success: `${BACK_URL}/feedbackSubscription`,
+      success: `${BACK_URL}/feedbackSubscription?time=${time}`,
       failure: `${BACK_URL}/feedbackSubscription`,
       pending: "",
     },
@@ -99,6 +100,8 @@ async function feedback(req, res) {
   }
 }
 async function feedbackSubscription(req, res) {
+  const time = req.query.time;
+
   try {
     let dataPay = {
       Payment: req.query.payment_id,
@@ -109,6 +112,7 @@ async function feedbackSubscription(req, res) {
     const user = await User.findByPk(dataPay.ExternalReference);
     if (dataPay.Status === "approved") {
       await user.update({ subscription: true });
+      setSubscriptions(time, dataPay.ExternalReference)
       res.redirect(CORS_DOMAIN);
     } else {
       res.redirect(CORS_DOMAIN);
