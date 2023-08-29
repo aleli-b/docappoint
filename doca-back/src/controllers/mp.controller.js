@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const mercadopago = require("mercadopago");
 const { User } = require("../db");
 const axios = require("axios");
-const { setPago } = require("../controllers/pagos.controller");
+const { setPago, sendEmailNotification } = require("../controllers/pagos.controller");
 const { setSubscriptions } = require("./subscription.controller");
 
 const MpAccessToken = process.env.MpAccessToken;
@@ -24,7 +24,7 @@ async function setPreferences(req, res) {
         currency_id: "ARS",
       },
     ],
-    external_reference: `${turno}_${user.id}_${doctor.id}`,
+    external_reference: `${turno}_${user.id}_${doctor.id}_${doctor.email}`,
     back_urls: {
       success: `${BACK_URL}/feedback`,
       failure: `${BACK_URL}/feedback`,
@@ -80,12 +80,14 @@ async function feedback(req, res) {
       date: references[0],
       userId: references[1],
       doctorId: references[2],
+      doctorEmail: references[3],
       paymentId: dataPay.Payment,
     };
     if (dataPay.Status === "approved") {
       try {
         const turnoId = await addTurno(userData);
         setPago(userData, turnoId);
+        sendEmailNotification(userData);
         res.redirect(CORS_DOMAIN);
       } catch (error) {
         console.error(error);

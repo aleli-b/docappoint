@@ -1,6 +1,7 @@
 require("dotenv").config({ path: "./.env" });
 const bodyParser = require("body-parser");
 const { Pago, User, Turno, Labtest } = require("../db");
+const transporter = require('../utils/mailer');
 const axios = require("axios");
 
 async function setPago(userData, turnoId) {
@@ -78,8 +79,26 @@ async function getConsultas(req, res) {
   }
 }
 
+function sendEmailNotification(userData) {
+  const mailOptions = {
+    from: process.env.MAILER_MAIL,
+    to: userData.doctorEmail,
+    subject: 'Nuevo turno registrado',
+    text: `Se registró un nuevo turno para el día ${userData.date}hs.\nID del pago: ${userData.paymentId}`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+    } else {
+      console.log('Correo electrónico de notificación enviado a:' + ' ' + userData.doctorEmail);
+    }
+  });
+}
+
 module.exports = {
   setPago,
   getPago,
   getConsultas,
+  sendEmailNotification,
 };

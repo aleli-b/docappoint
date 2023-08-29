@@ -122,7 +122,8 @@ export function TurnoCheckOut({ doctor, turno }) {
                 alignItems: "center",
               }}
             >
-              <CardMedia
+              {doctor.profile_picture_url?
+              (<CardMedia
                 component="img"
                 alt="img"
                 sx={{
@@ -132,10 +133,10 @@ export function TurnoCheckOut({ doctor, turno }) {
                   aspectRatio:"1/1",
                   
                 }}
-                image={
-                  doctor.profile_picture_url ? doctor.profile_picture_url : ""
-                }
-              />
+                image={doctor.profile_picture_url}
+              />):
+              <Avatar  sx={{width:"100%", height:"auto"}}/>
+              }
             </Box>
             {!isMobile ? (
               <Typography
