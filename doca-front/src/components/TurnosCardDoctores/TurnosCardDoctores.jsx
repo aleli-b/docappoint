@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, Typography, List, ListItem, ListItemText, Divider, Button } from '@mui/material';
+import { Card, CardContent, Typography, List, ListItem, ListItemText, Divider, Button, Box } from '@mui/material';
 import axios from 'axios';
 import moment from 'moment';
 import { useAuth } from '../context/AuthContext';
+import { ManualTurnoModal } from '../ManuallTurnoModal/ManualTurnoModal';
 
 export const TurnosCardDoctores = () => {
   const [turnos, setTurnos] = useState([]);
+  const [openManualTurno, setOpenManualTurno] = useState(false);
 
   const auth = useAuth();
 
@@ -26,6 +28,10 @@ export const TurnosCardDoctores = () => {
     }
   };
 
+  const handleOpen = () => {
+    setOpenManualTurno(true);
+  }
+
   useEffect(() => {
     getBackendTurnos();
   }, []);
@@ -33,9 +39,14 @@ export const TurnosCardDoctores = () => {
   return (
     <Card sx={{ minHeight: '100%' }}>
       <CardContent>
-        <Typography variant="h6" component="div">
-          Turnos Reservados
-        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
+          <Typography variant="h6" component="div">
+            Turnos Reservados
+          </Typography>
+          <Button onClick={handleOpen}>
+            Agregar Turno
+          </Button>
+        </Box>
         <List sx={{ mt: 2 }}>
           {turnos.length > 0 ? (
             turnos.map((turno) => (
@@ -48,6 +59,7 @@ export const TurnosCardDoctores = () => {
           )}
         </List>
       </CardContent>
+      <ManualTurnoModal openManualTurno={openManualTurno} closeManualTurno={() => setOpenManualTurno(false)}/>
     </Card>
   );
 }
