@@ -59,30 +59,37 @@ export const DoctorCard = ({ doctor, turnos }) => {
       i++;
     }
 
+
     for (let i = 0; i < 30; i++) {
       const date = today.clone().add(i, "days");
       const formattedDate = date.format("DD [de] MMMM");
       const dayOfWeek = daysOfWeekSpanish[date.day()];
-      // days.push({day: formattedDate});
-      // isPast = date.isBefore(moment()); // Compare entire date and time
 
-      let label;
+      let label = dayOfWeek;
+      let dayOff = [];
+      
+      if (label === doctor.dayOff) {
+        dayOff = true
+      }
+
       if (i === 0) {
         label = "Hoy";
       } else if (i === 1) {
         label = "Mañana";
-      } else {
-        label = dayOfWeek;
       }
 
-      generatedDates.push({ label, day: formattedDate, time: timeSlots });
+
+      generatedDates.push({ label, day: formattedDate, time: timeSlots, dayOff });
     }
+
     days = generatedDates.map((date) => moment(date.day, "DD [de] MMMM"));
     const isDayPast = days.map((day) => day.isBefore(moment()));
 
     generatedDates.forEach((date, index) => {
       date.isDayPast = isDayPast[index];
     });
+
+    console.log(generatedDates)
 
     return generatedDates;
   };
@@ -118,31 +125,29 @@ export const DoctorCard = ({ doctor, turnos }) => {
             <Typography variant="h5" component="div">
               {doc.name + " " + doc.lastName}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {doctor.cedulaVerified && (
-                <Box sx={{ display: "flex", flexDirection: "row", gap: 1, alignItems:"center"}}>
-                  <Typography variant="body2" sx={{ color: "#34c759" }}>
-                    Verificado por Docappoint
-                  </Typography>
-                  <SvgIcon sx={{fontSize:"1rem"}}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={2}
-                      height="5"
-                      viewBox="0 0 18 16"
-                      fill="none"
-                    >
-                      <path
-                        d="M6.05882 8.20588L7.88777 10.0589C8.10199 10.2759 8.45896 10.2524 8.64301 10.0092C9.19516 9.27984 10.2923 7.83354 11.1176 6.76471M17 8C17 11.866 13.4183 15 9 15C4.58172 15 1 11.866 1 8C1 4.13401 4.58172 1 9 1C13.4183 1 17 4.13401 17 8Z"
-                        stroke="#34C759"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </SvgIcon>
-                </Box>
-              )}
-            </Typography>
+            {doctor.cedulaVerified && (
+              <Box sx={{ display: "flex", flexDirection: "row", gap: 1, alignItems: "center" }}>
+                <Typography variant="body2" sx={{ color: "#34c759" }}>
+                  Verificado por Docappoint
+                </Typography>
+                <SvgIcon sx={{ fontSize: "1rem" }}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={2}
+                    height="5"
+                    viewBox="0 0 18 16"
+                    fill="none"
+                  >
+                    <path
+                      d="M6.05882 8.20588L7.88777 10.0589C8.10199 10.2759 8.45896 10.2524 8.64301 10.0092C9.19516 9.27984 10.2923 7.83354 11.1176 6.76471M17 8C17 11.866 13.4183 15 9 15C4.58172 15 1 11.866 1 8C1 4.13401 4.58172 1 9 1C13.4183 1 17 4.13401 17 8Z"
+                      stroke="#34C759"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </SvgIcon>
+              </Box>
+            )}
             <Typography variant="body2" color="text.secondary">
               {doc.category}
             </Typography>

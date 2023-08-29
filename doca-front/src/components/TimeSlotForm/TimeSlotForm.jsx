@@ -18,6 +18,7 @@ export const TimeSlotForm = ({ onCloseTimeSlot }) => {
   const [endHour, setEndHour] = useState(16);
   const [endMinute, setEndMinute] = useState(0);
   const [intervalHours, setIntervalHours] = useState(1);
+  const [dayOff, setDayOff] = useState('');
 
   const { user, token } = useAuth();
 
@@ -35,6 +36,7 @@ export const TimeSlotForm = ({ onCloseTimeSlot }) => {
             .toString()
             .padStart(2, "0")}`,
           interval: intervalHours,
+          dayOff: dayOff,
         },
         {
           headers: {
@@ -53,6 +55,16 @@ export const TimeSlotForm = ({ onCloseTimeSlot }) => {
       toast.error("Error al cambiar horario");
     }
   };
+
+  const daysOfWeekSpanish = [
+    "Domingo",
+    "Lunes",
+    "Martes",
+    "Miércoles",
+    "Jueves",
+    "Viernes",
+    "Sábado",
+  ];
 
   return (
     <Grid
@@ -124,7 +136,7 @@ export const TimeSlotForm = ({ onCloseTimeSlot }) => {
       <Grid
         item
         xs={12}
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2}}
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}
       >
         <Typography sx={{ textAlign: "center" }}>Intervalo (horas):</Typography>
         <TextField
@@ -134,11 +146,31 @@ export const TimeSlotForm = ({ onCloseTimeSlot }) => {
           inputProps={{ min: 1, max: 3 }}
         />
       </Grid>
-      <Grid item xs={12} sx={{display:"flex", flexDirection:"column", gap:2, alignItems:"center"}}>
+
+      <Grid item xs={6} sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+        <Typography sx={{ textAlign: "center" }}>Día no laborable:</Typography>
+        <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
+          <Select
+            value={dayOff}
+            onChange={(e) => setDayOff(e.target.value)}
+          >
+            <MenuItem value="">
+              <em>Ninguno</em>
+            </MenuItem>
+            {daysOfWeekSpanish.map((index) => (
+              <MenuItem key={index} value={index}>
+                {index.toString().padStart(2, "0")}
+              </MenuItem>
+            ))}
+          </Select>
+        </Box>
+      </Grid>
+
+      <Grid item xs={12} sx={{ display: "flex", flexDirection: "column", gap: 2, alignItems: "center" }}>
         <Button variant="contained" onClick={handleSaveField}>
           Guardar Preferencias de Tiempo
         </Button>
-        <Button variant="contained"  onClick={onCloseTimeSlot} sx={{bgcolor:"gray", width:"fit-content"}}>
+        <Button variant="contained" onClick={onCloseTimeSlot} sx={{ bgcolor: "gray", width: "fit-content" }}>
           Cancelar
         </Button>
       </Grid>

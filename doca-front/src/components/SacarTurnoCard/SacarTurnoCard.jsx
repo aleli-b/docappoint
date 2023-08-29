@@ -155,12 +155,12 @@ export const SacarTurnoCard = React.memo(({ doc, turnos, dates }) => {
                         }
                         disabled={
                           isTurnoOccupied(`${date.day} ${time.time}`) ||
-                          (time.isPast && date.isDayPast)
+                          (time.isPast && date.isDayPast || date.dayOff === true)
                         }
                         sx={{
                           textDecoration:
                             isTurnoOccupied(`${date.day} ${time.time}`) ||
-                            (time.isPast && date.isDayPast)
+                            (time.isPast && date.isDayPast || date.dayOff === true)                            
                               ? "line-through"
                               : "none",
                         }}
