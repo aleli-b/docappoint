@@ -20,6 +20,6 @@ export const ProfileRoute = ({ children }) => {
     case 'lab':
       return <PerfilLaboratorios />;
     default:
-      return <Navigate to="/" replace />; // Navega a la página de inicio si el tipo de usuario es desconocido
+      return <Navigate to="/" replace />;
   }
 };

@@ -1,6 +1,5 @@
 require("dotenv").config({ path: "./.env" });
-const bodyParser = require("body-parser");
-const { Op, sequelize } = require("sequelize");
+const { Op } = require("sequelize");
 const { User, Vendedor } = require("../db");
 
 async function getAssignedDoctors(req, res) {
