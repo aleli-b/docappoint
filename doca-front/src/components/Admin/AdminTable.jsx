@@ -243,7 +243,7 @@ export const AdminTable = ({
     }));
 
   const columnsVendedores = [
-    { field: "id", headerName: "ID", width: 400 },
+    
     { field: "vendedorName", headerName: "Nombre", width: 200 },
     {
       field: "cantDoctores",
@@ -525,6 +525,7 @@ export const AdminTable = ({
         </Box>
       ),
     },
+    { field: "id", headerName: "ID", width: 400 },
   ];
 
   return (

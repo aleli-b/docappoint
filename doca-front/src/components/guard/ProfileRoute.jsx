@@ -19,6 +19,8 @@ export const ProfileRoute = ({ children }) => {
       return <PerfilPacientes />;
     case 'lab':
       return <PerfilLaboratorios />;
+      // case 'vendedor':
+      //   return <PerfilVendedores />;
     default:
       return <Navigate to="/" replace />; // Navega a la página de inicio si el tipo de usuario es desconocido
   }

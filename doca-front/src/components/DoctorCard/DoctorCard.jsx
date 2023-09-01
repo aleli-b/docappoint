@@ -89,8 +89,6 @@ export const DoctorCard = ({ doctor, turnos }) => {
       date.isDayPast = isDayPast[index];
     });
 
-    console.log(generatedDates)
-
     return generatedDates;
   };
 
