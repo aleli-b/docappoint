@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { PerfilDoctores } from '../../pages/Perfil/PerfilDoctores/PerfilDoctores';
 import { PerfilPacientes } from '../../pages/Perfil/PerfilPacientes/PerfilPacientes';
 import { PerfilLaboratorios } from '../../pages/Perfil/PerfilLaboratorios/PerfilLaboratorios';
+import { PerfilVendedores } from '../../pages/Perfil/PerfilVendedores/PerfilVendedores';
 
 export const ProfileRoute = ({ children }) => {
   const auth = useAuth();
@@ -19,6 +20,8 @@ export const ProfileRoute = ({ children }) => {
       return <PerfilPacientes />;
     case 'lab':
       return <PerfilLaboratorios />;
+    case 'vendedor':
+      return <PerfilVendedores />;
     default:
       return <Navigate to="/" replace />;
   }

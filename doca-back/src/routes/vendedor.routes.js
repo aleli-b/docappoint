@@ -3,7 +3,7 @@ const router = Router();
 const vendedorController = require('../controllers/vendedor.controller');
 const jwtVerify = require('../middlewares/isAuth')
 
-router.post('/getAssignedDoctors/', vendedorController.getAssignedDoctors)
+router.post('/getAssignedDoctors', vendedorController.getAssignedDoctors)
 
 router.get('/getUnassignedDoctors/', vendedorController.getUnassignedDoctors)
 
