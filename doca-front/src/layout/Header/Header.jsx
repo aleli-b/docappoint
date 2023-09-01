@@ -19,13 +19,14 @@ import { useNavigate } from 'react-router-dom';
 import docca from '../../assets/Ic2.svg'
 import { CleaningServices } from '@mui/icons-material';
 import './Header.css';
-import { Link } from '@mui/material';
+import { Link, useMediaQuery } from '@mui/material';
 
 export const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [anchorElReg, setAnchorElReg] = React.useState(null);
     const [anchorElRegXs, setAnchorElRegXs] = React.useState(null);
+    const isMobile = useMediaQuery('(max-width: 900px)')
 
     // React.useEffect(() => {
     //     handleCloseUserMenu(); // This will close the user menu when the component mounts
@@ -338,9 +339,9 @@ export const Header = () => {
             </AppBar >
             {auth.user && auth.user.userType != 'patient' && auth.user.subscription === false &&
                 <Box sx={{ backgroundColor: 'gray', minWidth: '100%', height: '80px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <div id="redline"></div>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, marginBottom: 3.5 }}>
-                        <Typography variant='body1' sx={{ color: 'white', fontWeight: 'bold', }}> <Link href={`/plan/${auth.user.userType}`} sx={{ textDecoration: 'none', color: 'red', "&:hover": { textDecoration: 'underline', color: 'blue' } }}>Subscríbete</Link> a un plan para tener acceso a todas las funciones de la página</Typography>
+                    <Box id="redline"></Box>
+                    <Box sx={{p:isMobile? 1:"", display: 'flex', alignItems: 'center', gap: 2, height:"100%"}}>
+                        <Typography variant='body1' sx={{ color: 'white', fontWeight: 'bold', }}> <Link href={`/plan/${auth.user.userType}`} sx={{ textDecoration: 'none', color: 'red', "&:hover": { textDecoration: 'underline', color: 'orange' } }}>Subscríbete</Link> a un plan para tener acceso a todas las funciones de la página</Typography>
                         <ErrorIcon sx={{ color: 'red', backgroundColor: 'white', borderRadius: '100%' }} />
                     </Box>
                 </Box>

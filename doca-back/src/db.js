@@ -54,7 +54,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Turno, Message, Conversation, Labtest, Pago, Valoraciones, Subscriptions } =
+const { User, Turno, Message, Conversation, Labtest, Pago, Valoraciones, Subscriptions, Vendedor } =
   sequelize.models;
 
 
@@ -158,6 +158,10 @@ User.hasMany(Valoraciones, { foreignKey: 'userId', as: "reseñas" });
 
 User.hasMany(Subscriptions, {foreignKey: "userId", as:"suscripcion"})
 Subscriptions.belongsTo(User, {foreignKey: "userId", as:"user"})
+
+Vendedor.hasMany(User, {foreignKey: "userId", as:"doctor"})
+User.belongsTo(Vendedor, {foreignKey: "userId", as:"vendedor"})
+
 
 
 module.exports = {

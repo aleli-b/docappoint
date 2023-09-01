@@ -51,7 +51,7 @@ export function TurnoCheckOut({ doctor, turno }) {
   const isMobile = useMediaQuery("(max-width: 900px)");
 
   return (
-    <Container sx={{ width: "100%", minHeight: "100dvh" }}>
+    <Container sx={{ width: "100%", minHeight: "100dvh", pb: isMobile? 2:0 }}>
       <Typography
         variant="h1"
         sx={{
@@ -71,7 +71,7 @@ export function TurnoCheckOut({ doctor, turno }) {
           display: "flex",
           flexDirection: "column",
           bgcolor: "rgba(131, 131, 131, 0.22)",
-          p:4,
+          p: 4,
           width: "100%",
           borderRadius: 5,
           gap: 4,
@@ -94,10 +94,10 @@ export function TurnoCheckOut({ doctor, turno }) {
           className="boxContainer"
           sx={{
             display: "flex",
-            flexDirection: isMobile?"column":"row",
+            flexDirection: isMobile ? "column" : "row",
             gap: isMobile ? 2 : "",
             justifyContent: "space-evenly",
-            width: isMobile?"100%":"90%",
+            width: isMobile ? "100%" : "90%",
           }}
         >
           <Box
@@ -108,35 +108,40 @@ export function TurnoCheckOut({ doctor, turno }) {
               alignContent: "center",
               textAlign: "center",
               gap: 2,
-              width: isMobile? "100%":"40dvw",
+              width: isMobile ? "100%" : "40dvw",
               alignItems: "center",
             }}
           >
             <Box
               className="imgProfile"
               sx={{
-                width:  isMobile? "100%":"50%",
-                maxHeight:   isMobile? "flex-start":"100%",
+
+                maxWidth: isMobile ? "80%" : "50%",
+                maxHeight: isMobile ? "100%" : "100%",
                 display: "flex",
-                justifyContent: isMobile? "flex-start":"center",
+                justifyContent: isMobile ? "flex-start" : "center",
                 alignItems: "center",
+                overflow: "hidden",
+                
               }}
             >
-              {doctor.profile_picture_url?
-              (<CardMedia
-                component="img"
-                alt="img"
-                sx={{
-                  width:"100%",
-                  height:"auto",
-                  objectFit:"contain",
-                  aspectRatio:"1/1",
-                  
-                }}
-                image={doctor.profile_picture_url}
-              />):
-              <Avatar  sx={{width:"100%", height:"auto"}}/>
-              }
+              {doctor.profile_picture_url ? (
+                <CardMedia
+                  component="img"
+                  alt="img"
+                  sx={{
+                    width: "auto",
+                    height: "auto",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    objectFit: "contain",
+                    borderRadius: "1.5rem",
+                  }}
+                  image={doctor.profile_picture_url}
+                />
+              ) : (
+                <Avatar sx={{ width: "100%", height: "100%", aspectRatio:"1" }} />
+              )}
             </Box>
             {!isMobile ? (
               <Typography
@@ -168,7 +173,7 @@ export function TurnoCheckOut({ doctor, turno }) {
               flexDirection: "column",
               alignContent: "center",
               gap: 1,
-              width: isMobile? "100%": "38dvw",
+              width: isMobile ? "100%" : "38dvw",
               pt: isMobile ? "" : doctor.profile_picture_url ? "5dvh" : "",
             }}
           >
@@ -176,7 +181,7 @@ export function TurnoCheckOut({ doctor, turno }) {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: isMobile? "center":"flex-start",
+                alignItems: isMobile ? "center" : "flex-start",
                 gap: 2,
               }}
             >
