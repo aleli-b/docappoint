@@ -48,6 +48,26 @@ async function addTurno(userData) {
   }
 }
 
+async function addOccupiedTurno(req, res) {
+  const { date, userId, doctorId } = req.body;
+  try {    
+
+    const doctorCheck = await Turno.findOne({
+      where: { doctorId },
+    });
+
+    if (doctorCheck && date === doctorCheck.date) {
+      return res.status(403).send("El doctor ya tiene turno para este horario.");
+    }  
+
+    const turno = await Turno.create({ date, userId, doctorId });
+    return res.status(200).send(turno.id);
+
+  } catch (error) {
+    return res.status(400).send("Error creating turno");
+  }
+}
+
 async function getPacienteTurno(req, res) {
   try {
     const { userId } = req.body;
@@ -114,6 +134,7 @@ cron.schedule("0 0 * * *", deletePastTurnos);
 module.exports = {
   getOccupiedTurnos,
   addTurno,
+  addOccupiedTurno,
   getPacienteTurno,
   getDoctorTurno,
 };

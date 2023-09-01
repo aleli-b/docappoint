@@ -3,7 +3,7 @@ const router = Router();
 const turnoController = require('../controllers/turno.controller');
 const jwtVerify = require('../middlewares/isAuth')
 
-// router.post('/turnos', jwtVerify , turnoController.addTurno)
+router.post('/occupied-turnos', /* jwtVerify, */ turnoController.addOccupiedTurno)
 
 router.get('/turnos-ocupados', /* jwtVerify, */ turnoController.getOccupiedTurnos)
 
