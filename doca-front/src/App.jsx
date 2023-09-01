@@ -27,7 +27,7 @@ import { ResetPasswordForm } from "./pages/ResetPassword/ResetPassword";
 import { LabTests } from "./pages/LabTests/LabTests";
 import { Plan } from "./components/Plan/Plan";
 import { Consultas } from "./pages/Consulta/Consultas";
-
+import { AllowedUserTypes } from "./components/guard/AllowedUserTypes";
 
 const router = createBrowserRouter([
   { path: "*", Component: Root },
@@ -76,14 +76,13 @@ function Root() {
               <Route path="/" element={<Especialistas />} />
               <Route path="/admin/*" element={<AdminRoute> <UserAdmin /> </AdminRoute>} />
               <Route path="/perfil/*" element={<ProfileRoute> <PerfilDoctores /> <PerfilLaboratorios /> <PerfilPacientes /> </ProfileRoute>} />
-              <Route path="/consulta/*" element={<Error />} />
               <Route path="/turnos/*" element={<LoginRoute><Turnos location={location} /></LoginRoute>} />
               <Route path="/messages/*" element={<Messages />} />
-              <Route path="/tests" element={<LabTests />} />
-              <Route path="/plan/:userType" element={<Plan />} />
+              <Route path="/tests" element={<AllowedUserTypes allowedUserTypes={'lab'}><LabTests /></AllowedUserTypes>} />
+              <Route path="/plan/:userType" element={<AllowedUserTypes allowedUserTypes={['doctor','lab']}><Plan /></AllowedUserTypes>} />
               <Route path="/reset-password/:token" element={<ResetPasswordForm />} />
-              <Route path="/Consultas" element={<Consultas />} />
-              <Route path="/valoraciones" element={<Consultas />} />
+              <Route path="/Consultas" element={<AllowedUserTypes allowedUserTypes={['patient']}><Consultas /></AllowedUserTypes>} />
+              <Route path="/Vendedor" element={<AllowedUserTypes allowedUserTypes={'vendedor'}><Consultas /></AllowedUserTypes>} />
             </Routes>
             <Footer sx={{mp:"auto" }} />
           </ThemeProvider>

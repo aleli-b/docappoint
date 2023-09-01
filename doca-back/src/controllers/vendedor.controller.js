@@ -34,7 +34,6 @@ async function getAssignedDoctors(req, res) {
         lastName: user.lastName,
         email: user.email,
         phone: user.phone,
-        clabe: user.clabe,
         category: user.category,
         profilePicture: user.profile_picture_url,
       };
