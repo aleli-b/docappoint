@@ -55,7 +55,7 @@ export const PerfilVendedores = () => {
             }}
         >
             <Box item sx={{ width: "100%", display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", gap: 2 }}>
-                <Box sx={{ display: "flex", flexDirection: "column", width: isMobile ? "100%" : "30%", gap: 3 }}>
+                <Box sx={{ display: "flex", flexDirection: "column", width: isMobile ? "100%" : "30%", gap: 3, }}>
                     <Card
                         className="patientCard"
                         sx={{
@@ -65,6 +65,7 @@ export const PerfilVendedores = () => {
                             gap: 2,
                             width: "100%",
                             p: 2,
+                            flexGrow: 1,
                         }}
                     >
                         <Avatar
@@ -166,7 +167,6 @@ export const PerfilVendedores = () => {
                             display: "flex",
                             flexDirection: "row",
                             justifyContent: "space-between",
-                            borderBottom: 'solid gray 1px',
                             p: 1,
                             alignItems: "center"
                         }}
@@ -190,7 +190,6 @@ export const PerfilVendedores = () => {
 
             <Grid container spacing={2}>
                 <Grid item md={12} xs={12}>
-                    {/* <TurnosCardPacientes /> */}
                     <AssignedDoctorCard />
                 </Grid>
             </Grid>

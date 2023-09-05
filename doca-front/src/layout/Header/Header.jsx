@@ -28,13 +28,6 @@ export const Header = () => {
     const [anchorElRegXs, setAnchorElRegXs] = React.useState(null);
     const isMobile = useMediaQuery('(max-width: 900px)')
 
-    // React.useEffect(() => {
-    //     handleCloseUserMenu(); // This will close the user menu when the component mounts
-    //     return () => {
-    //         handleCloseUserMenu(); // This will also close the user menu when navigating away from the current page
-    //     };
-    // }, []);
-
     const auth = useAuth();
 
     const { conversations } = useMessageContext();
@@ -156,8 +149,8 @@ export const Header = () => {
                                 auth.user
                                     ?
                                     <Container id='kilombero' sx={{ display: 'flex', alignItems: 'center', gap: 2, }}>
-                                        <Container sx={{ display: 'flex', alignItems: 'center', }}>
-                                            <Button sx={{ color: 'white', }} onClick={() => { handleMessages() }}>
+                                        <Container sx={{ display: auth.user.userType === 'vendedor' ? 'none' : 'flex', alignItems: 'center', }}>
+                                            <Button sx={{ color: 'white', }} onClick={() => {handleMessages()}}>
                                                 <QuestionAnswerIcon />
                                                 <div style={{ backgroundColor: 'red', borderRadius: 100, textAlign: 'center', minHeight: '1.5rem', minWidth: '1.5rem ', position: 'relative', bottom: '8px' }}>{totalMessages}</div>
                                             </Button>
@@ -191,18 +184,9 @@ export const Header = () => {
                                                     <Typography textAlign="center">MIS ANALISIS</Typography>
                                                 </MenuItem>
                                             }
-                                            {auth.user.userType === 'patient' &&<MenuItem onClick={() => { handleCloseUserMenu(); handleQueries() }}>
-                                            <Typography textAlign="center">MIS CONSULTAS</Typography>
-                                        </MenuItem>}
-                                        {/* 
-                                            auth.user.userType === 'doctor' &&
-                                            <MenuItem onClick={() => { handleCloseUserMenu() }}>
-                                                <Typography textAlign="center">AGENDA</Typography>
-                                            </MenuItem>
-                                        }
-                                        <MenuItem onClick={() => { handleCloseUserMenu() }}>
-                                            <Typography textAlign="center">MEDIOS DE PAGO</Typography>
-                                        </MenuItem> */}
+                                            {auth.user.userType === 'patient' && <MenuItem onClick={() => { handleCloseUserMenu(); handleQueries() }}>
+                                                <Typography textAlign="center">MIS CONSULTAS</Typography>
+                                            </MenuItem>}
                                             {
                                                 auth.user.admin &&
                                                 <MenuItem onClick={() => { handleCloseUserMenu(); handleAdmin() }}>
@@ -340,7 +324,7 @@ export const Header = () => {
             {auth.user && auth.user.userType != 'patient' && auth.user.subscription === false &&
                 <Box sx={{ backgroundColor: 'gray', minWidth: '100%', height: '80px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Box id="redline"></Box>
-                    <Box sx={{p:isMobile? 1:"", display: 'flex', alignItems: 'center', gap: 2, height:"100%"}}>
+                    <Box sx={{ p: isMobile ? 1 : "", display: 'flex', alignItems: 'center', gap: 2, height: "100%" }}>
                         <Typography variant='body1' sx={{ color: 'white', fontWeight: 'bold', }}> <Link href={`/plan/${auth.user.userType}`} sx={{ textDecoration: 'none', color: 'red', "&:hover": { textDecoration: 'underline', color: 'orange' } }}>Subscríbete</Link> a un plan para tener acceso a todas las funciones de la página</Typography>
                         <ErrorIcon sx={{ color: 'red', backgroundColor: 'white', borderRadius: '100%' }} />
                     </Box>
