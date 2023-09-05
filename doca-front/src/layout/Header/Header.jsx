@@ -150,7 +150,7 @@ export const Header = () => {
                                     ?
                                     <Container id='kilombero' sx={{ display: 'flex', alignItems: 'center', gap: 2, }}>
                                         <Container sx={{ display: auth.user.userType === 'vendedor' ? 'none' : 'flex', alignItems: 'center', }}>
-                                            <Button sx={{ color: 'white', }} onClick={() => {handleMessages()}}>
+                                            <Button sx={{ color: 'white', }} onClick={() => { handleMessages() }}>
                                                 <QuestionAnswerIcon />
                                                 <div style={{ backgroundColor: 'red', borderRadius: 100, textAlign: 'center', minHeight: '1.5rem', minWidth: '1.5rem ', position: 'relative', bottom: '8px' }}>{totalMessages}</div>
                                             </Button>
