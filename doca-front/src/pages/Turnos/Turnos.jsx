@@ -19,6 +19,7 @@ import { TurnoCheckOut } from "../../components/SacarTurnoCard/TurnoCheckOut";
 export const Turnos = ({ location }) => {
   const [doctor, setDoctor] = useState([]);
   const [turno, setTurno] = useState([]);
+  const [type, setType] = useState([]);
 
   const queryParams = new URLSearchParams(location.search);
   const doctorId = queryParams.get("doctor");
@@ -63,28 +64,29 @@ export const Turnos = ({ location }) => {
     try {
       const doctorId = sessionStorage.getItem('doctorId');
       const turno = sessionStorage.getItem('turno');
-  
+      const type = sessionStorage.getItem('type');
+
       if (!doctorId || !turno) {
         console.error("Doctor ID or turno is missing");
         return;
       }
-  
+
       const response = await axios.get(`${svHost}/user/${doctorId}`);
       setDoctor(response.data);
       setTurno(turno);
+      setType(type);
     } catch (error) {
       console.error(error);
     }
   };
-  
+
   useEffect(() => {
     getDoctor();
   }, []);
 
- 
   return (
     <>
-      <TurnoCheckOut doctor={doctor} turno={turno} />
+      <TurnoCheckOut doctor={doctor} turno={turno} type={type} />
     </>
   );
 };

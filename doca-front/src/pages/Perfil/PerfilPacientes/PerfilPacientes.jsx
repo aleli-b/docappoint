@@ -4,25 +4,20 @@ import {
   Box,
   Button,
   Card,
-  CardContent,
-  CardMedia,
-  Checkbox,
   Container,
-  FormControlLabel,
   Grid,
   Paper,
-  Stack,
   Typography,
   styled,
   useMediaQuery,
 } from "@mui/material";
-import titan from "../../../assets/titan.jpg";
 import { TurnosCardPacientes } from "../../../components/TurnosCardPacientes/TurnosCardPacientes";
 import { Mensajeria } from "../../../components/Mensajeria/Mensajeria";
 import { useAuth } from "../../../components/context/AuthContext";
 import EditIcon from "@mui/icons-material/Edit";
 import { EditModal } from "../../../components/EditModal/EditModal";
 import { UploadImage } from "../../UploadImage/UploadImage";
+import { AnalisisCard } from "../../../components/AnalisisCard/AnalisisCard";
 
 export const PerfilPacientes = () => {
   const { user, editUser } = useAuth();
@@ -61,8 +56,8 @@ export const PerfilPacientes = () => {
         marginY: 2,
       }}
     >
-      <Box item sx={{width:"100%", display: "flex", flexDirection: isMobile? "column":"row", justifyContent:"space-between",gap: 2 }}>
-        <Box sx={{ display: "flex", flexDirection: "column", width:isMobile? "100%":"30%", gap:3}}>
+      <Box item sx={{ width: "100%", display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", gap: 2 }}>
+        <Box sx={{ display: "flex", flexDirection: "column", width: isMobile ? "100%" : "30%", gap: 3 }}>
           <Card
             className="patientCard"
             sx={{
@@ -103,12 +98,12 @@ export const PerfilPacientes = () => {
         <Card
           className="patientData"
           sx={{
-            width:isMobile? "100%":"70%",
+            width: isMobile ? "100%" : "70%",
             minHeight: "100%",
             p: 2,
             display: "flex",
             flexDirection: "column",
-            justifyContent:"space-evenly",
+            justifyContent: "space-evenly",
             gap: 2,
           }}
         >
@@ -119,8 +114,8 @@ export const PerfilPacientes = () => {
               flexDirection: "row",
               justifyContent: "space-between",
               borderBottom: 'solid gray 1px',
-              p:1,
-              alignItems:"center"
+              p: 1,
+              alignItems: "center"
             }}
           >
             <Typography>Nombre:</Typography>
@@ -133,8 +128,8 @@ export const PerfilPacientes = () => {
               flexDirection: "row",
               justifyContent: "space-between",
               borderBottom: 'solid gray 1px',
-              p:1,
-              alignItems:"center"
+              p: 1,
+              alignItems: "center"
             }}
           >
             <Typography>Apellido:</Typography>
@@ -147,8 +142,8 @@ export const PerfilPacientes = () => {
               flexDirection: "row",
               justifyContent: "space-between",
               borderBottom: 'solid gray 1px',
-              p:1,
-              alignItems:"center"
+              p: 1,
+              alignItems: "center"
             }}
           >
             <Typography>Correo:</Typography>
@@ -161,8 +156,8 @@ export const PerfilPacientes = () => {
               flexDirection: "row",
               justifyContent: "space-between",
               borderBottom: 'solid gray 1px',
-              p:1,
-              alignItems:"center"
+              p: 1,
+              alignItems: "center"
             }}
           >
             <Typography>Tipo de Usuario:</Typography>
@@ -175,8 +170,8 @@ export const PerfilPacientes = () => {
               flexDirection: "row",
               justifyContent: "space-between",
               borderBottom: 'solid gray 1px',
-              p:1,
-              alignItems:"center"
+              p: 1,
+              alignItems: "center"
             }}
           >
             <Typography>Telefono:</Typography>
@@ -197,7 +192,10 @@ export const PerfilPacientes = () => {
       </Box>
 
       <Grid container spacing={2}>
-        <Grid item md={12} xs={12}>
+        <Grid item md={6} xs={12}>
+          <AnalisisCard />
+        </Grid>
+        <Grid item md={6} xs={12}>
           <TurnosCardPacientes />
         </Grid>
       </Grid>

@@ -115,6 +115,7 @@ export const Consultas = () => {
   }, []);
 
   const isMobile = useMediaQuery("(max-width: 900px)");
+  
   return (
     <Container
       sx={{

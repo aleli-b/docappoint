@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
             },
             lab_test_url: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: true,
             },
             labId: {
                 type: DataTypes.UUID,

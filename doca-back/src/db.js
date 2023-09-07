@@ -54,7 +54,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Turno, Message, Conversation, Labtest, Pago, Valoraciones, Subscriptions, Vendedor } =
+const { User, Turno, Message, Conversation, Labtest, Pago, Valoraciones, Subscriptions, Vendedor, } =
   sequelize.models;
 
 

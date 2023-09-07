@@ -5,6 +5,8 @@ const jwtVerify = require('../middlewares/isAuth');
 
 router.get('/labtests', labtestController.getLabtests);
 
-router.post('/labtests', labtestController.uploadLabtest);
+router.post('/labtests', labtestController.addOrder);
+
+// router.post('/labtests', labtestController.uploadLabtest);
 
 module.exports = router;

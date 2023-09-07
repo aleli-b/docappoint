@@ -17,7 +17,7 @@ async function getOccupiedTurnos(req, res) {
 }
 
 async function addTurno(userData) {
-  const { date, userId, doctorId } = userData;
+  const { date, userId, doctorId, type } = userData;
   console.log("primera", date);
   console.log(userId, doctorId);
   try {
@@ -40,7 +40,7 @@ async function addTurno(userData) {
       return("The User already has a turno");
     }
 
-    const turno = await Turno.create({ date, userId, doctorId });
+    const turno = await Turno.create({ date, userId, doctorId, type });
     return(turno.id);
   } catch (error) {
     // console.error(error);

@@ -10,7 +10,7 @@ import {
   Rating,
   Typography,
 } from "@mui/material";
-import { RedesSocialesCard } from "../../../components/RedesSocialesCard/RedesSocialesCard";
+import { AnalisisCard } from "../../../components/AnalisisCard/AnalisisCard";
 import { TurnosCardDoctores } from "../../../components/TurnosCardDoctores/TurnosCardDoctores";
 import { useAuth } from "../../../components/context/AuthContext";
 import { EditModal } from "../../../components/EditModal/EditModal";
@@ -31,7 +31,6 @@ export const PerfilDoctores = () => {
   const [openSlotModal, setOpenSlotModal] = useState(false);
 
   user.fullName = user.name + " " + user.lastName;
-  user.userType = user.userType[0].toUpperCase() + user.userType.substring(1);
 
   const handleSaveField = (field, value) => {
     try {
@@ -190,7 +189,7 @@ export const PerfilDoctores = () => {
                 }}
               >
                 <Typography>Tipo de usuario:</Typography>
-                <Typography>{user.userType}</Typography>
+                <Typography>{user.userType[0].toUpperCase() + user.userType.substring(1)}</Typography>
               </Box>
               <Box
                 sx={{
@@ -303,7 +302,7 @@ export const PerfilDoctores = () => {
       </Grid>
       <Grid container spacing={2}>
         <Grid item md={4} xs={12}>
-          <RedesSocialesCard />
+          <AnalisisCard />
         </Grid>
         {/* <Grid item md={4} xs={12}>
                     <ReseñasCard />

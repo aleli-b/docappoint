@@ -62,6 +62,10 @@ export const Header = () => {
         navigate('/Consultas')
     };
 
+    const handleOrders = () => {
+        navigate('/pedidos')
+    }
+
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -186,6 +190,9 @@ export const Header = () => {
                                             }
                                             {auth.user.userType === 'patient' && <MenuItem onClick={() => { handleCloseUserMenu(); handleQueries() }}>
                                                 <Typography textAlign="center">MIS CONSULTAS</Typography>
+                                            </MenuItem>}
+                                            {auth.user.userType === 'doctor' && <MenuItem onClick={() => { handleCloseUserMenu(); handleOrders() }}>
+                                                <Typography textAlign="center">PEDIDOS DE ANALISIS</Typography>
                                             </MenuItem>}
                                             {
                                                 auth.user.admin &&

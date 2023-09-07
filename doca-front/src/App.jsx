@@ -28,6 +28,7 @@ import { LabTests } from "./pages/LabTests/LabTests";
 import { Plan } from "./components/Plan/Plan";
 import { Consultas } from "./pages/Consulta/Consultas";
 import { AllowedUserTypes } from "./components/guard/AllowedUserTypes";
+import { LabOrder } from "./pages/LabOrder/LabOrder";
 
 const router = createBrowserRouter([
   { path: "*", Component: Root },
@@ -77,6 +78,7 @@ function Root() {
               <Route path="/admin/*" element={<AdminRoute> <UserAdmin /> </AdminRoute>} />
               <Route path="/perfil/*" element={<ProfileRoute> <PerfilDoctores /> <PerfilLaboratorios /> <PerfilPacientes /> </ProfileRoute>} />
               <Route path="/turnos/*" element={<LoginRoute><Turnos location={location} /></LoginRoute>} />
+              <Route path="/pedidos/*" element={<LabOrder/>} />
               <Route path="/messages/*" element={<Messages />} />
               <Route path="/tests" element={<AllowedUserTypes allowedUserTypes={'lab'}><LabTests /></AllowedUserTypes>} />
               <Route path="/plan/:userType" element={<AllowedUserTypes allowedUserTypes={['doctor','lab']}><Plan /></AllowedUserTypes>} />

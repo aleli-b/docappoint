@@ -14,13 +14,15 @@ async function getLabtests(req, res) {
             test = await Labtest.findAll({
                 where: {
                     userId: userId
-                }
+                },
+                include: ["labtestDoctor", "labtestLab"],
             });
         } else if (doctorId) {
             test = await Labtest.findAll({
                 where: {
                     doctorId: doctorId
-                }
+                },
+                include: ["labtestLab", "labtestPatient"],
             });
         } else if (labId) {
             test = await Labtest.findAll({
@@ -40,6 +42,22 @@ async function getLabtests(req, res) {
     } catch (error) {
         console.log(error);
         return res.status(500).send('Ha habido un error');
+    }
+}
+
+async function addOrder(req, res) {
+    try {
+        const { labId, userId, doctorId, } = req.body;
+        const labtest = new Labtest({
+            labId: labId,
+            userId: userId,
+            doctorId: doctorId,
+        })
+        await labtest.save();
+        return res.status(200).send('exitos')
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send('Ha habido un error')
     }
 }
 
@@ -63,5 +81,6 @@ async function uploadLabtest(req, res) {
 
 module.exports = {
     getLabtests,
+    addOrder,
     uploadLabtest,
 }
