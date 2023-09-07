@@ -1,9 +1,31 @@
-import React from 'react';
-import { Box, Button, Container, Typography, useMediaQuery } from '@mui/material'
+import React, { useEffect, useState } from 'react';
+import { Box, Button, Container, List, ListItem, Typography, useMediaQuery } from '@mui/material'
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useAuth } from '../../components/context/AuthContext';
+import { OrderModal } from '../../components/OrderModal/OrderModal';
 
 export const LabOrder = () => {
+  const [turnos, setTurnos] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [patient, setPatient] = useState([]);
+
+  useEffect(() => {
+    getTurnos();
+  }, [])
+
   const svHost = import.meta.env.VITE_HOST;
+  const { user } = useAuth();
+
+  const getTurnos = async () => {
+    try {
+      const backTurnos = await axios.post(`${svHost}/doctor-turnos`, { doctorId: user.id })
+      setTurnos(backTurnos.data);
+      console.log(turnos)
+    } catch (error) {
+      toast.error('Ha ocurrido un error, inténtenlo de nuevo más tarde')
+    }
+  }
 
   const handleClick = async () => {
     const userId = '2f66b085-1b03-4848-a99e-c7bea08805db';
@@ -28,9 +50,25 @@ export const LabOrder = () => {
         Pedidos de Análisis
       </Typography>
       <Box>
-      <Button onClick={handleClick}>Añadir pedido</Button>
+        <Typography>Seleccione un paciente:</Typography>
+        {turnos.length > 0
+          ?
+          <List>
+            {turnos.map((turno, i) => (
+              <ListItem key={i} >
+                <Button onClick={() => {setOpen(true); setPatient(turno)}} sx={{ '&:hover': { outline: 'solid 1px red' }, }}>
+                  {turno.paciente.name} {turno.paciente.lastName}
+                </Button>
+              </ListItem>
+            ))}
+          </List>
+          :
+          <Typography>No tienes turnos</Typography>
+        }
+        {/* <Button onClick={handleClick}>Añadir pedido</Button> */}
 
       </Box>
+      <OrderModal open={open} onClose={() => setOpen(false)} patient={patient} />
     </Container>
   )
 }
