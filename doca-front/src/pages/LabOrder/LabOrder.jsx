@@ -21,7 +21,6 @@ export const LabOrder = () => {
     try {
       const backTurnos = await axios.post(`${svHost}/doctor-turnos`, { doctorId: user.id })
       setTurnos(backTurnos.data);
-      console.log(turnos)
     } catch (error) {
       toast.error('Ha ocurrido un error, inténtenlo de nuevo más tarde')
     }
@@ -56,7 +55,7 @@ export const LabOrder = () => {
           <List>
             {turnos.map((turno, i) => (
               <ListItem key={i} >
-                <Button onClick={() => {setOpen(true); setPatient(turno)}} sx={{ '&:hover': { outline: 'solid 1px red' }, }}>
+                <Button onClick={() => {setPatient(turno); setOpen(true)}} sx={{ '&:hover': { outline: 'solid 1px red' }, }}>
                   {turno.paciente.name} {turno.paciente.lastName}
                 </Button>
               </ListItem>
@@ -65,7 +64,6 @@ export const LabOrder = () => {
           :
           <Typography>No tienes turnos</Typography>
         }
-        {/* <Button onClick={handleClick}>Añadir pedido</Button> */}
 
       </Box>
       <OrderModal open={open} onClose={() => setOpen(false)} patient={patient} />

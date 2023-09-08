@@ -15,6 +15,7 @@ export const FilterSideBar = ({ handleCategoryChange }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const isMobile = useMediaQuery("(max-width: 900px)");
+  
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };

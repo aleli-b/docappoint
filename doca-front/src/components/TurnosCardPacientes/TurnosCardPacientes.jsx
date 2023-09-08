@@ -36,12 +36,12 @@ export const TurnosCardPacientes = () => {
   }, [])
 
   return (
-    <Card sx={{}}>
+    <Card sx={{minHeight: '100%'}}>
       <CardContent>
         <Typography variant="h6" component="div">
           Turnos Ocupados
         </Typography>
-        <List sx={{ mt: 2 }}>
+        <List sx={{ maxHeight: '176px', overflowY: 'auto', }}>
           {turnos.length > 0 ? (
             turnos.map((turno) => (
               <ListItem key={turno.id}>

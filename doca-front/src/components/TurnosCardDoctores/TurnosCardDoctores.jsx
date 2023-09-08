@@ -56,7 +56,7 @@ export const TurnosCardDoctores = () => {
             <CircularProgress />
           </Box>
           :
-          <List sx={{ mt: 2 }}>
+          <List sx={{ mt: 2, maxHeight: '176px', overflowY: 'auto', }}>
             {turnos.length > 0 ? (
               turnos.map((turno) => (
                 <ListItem key={turno.id}>

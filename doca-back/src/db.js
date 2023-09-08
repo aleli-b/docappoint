@@ -62,6 +62,7 @@ const { User, Turno, Message, Conversation, Labtest, Pago, Valoraciones, Subscri
 
 User.hasMany(Turno, { as: "turno", foreignKey: "userId" });
 Turno.belongsTo(User, { as: "doctor", foreignKey: "doctorId" });
+Turno.belongsTo(User, { as: "lab", foreignKey: "labId" });
 Turno.belongsTo(User, { as: "paciente", foreignKey: "userId" });
 
 User.hasMany(Message, { as: "sentMessages", foreignKey: "senderId" });

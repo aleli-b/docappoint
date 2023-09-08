@@ -48,11 +48,6 @@ export const Mensajeria = () => {
     });
   }, [conversations]);
 
-  // const getDoctors = async () => {
-  //   const userData = await axios.get(`${svHost}/doctors`);
-  //   setDoctors(userData.data);
-  // };
-
   const getLabs = async () => {
     const labData = await axios.get(`${svHost}/labs`);
     setLabs(labData.data);
@@ -76,7 +71,6 @@ export const Mensajeria = () => {
 
   useEffect(() => {
     getTurnos();
-    // getDoctors();
   }, []);
 
   const handleSubmit = async () => {
@@ -93,7 +87,6 @@ export const Mensajeria = () => {
   const handleClickOpen = () => {
     setShowDoctors(true);
     setShowLabs(false);
-    // getDoctors();
     setOpen(true);
   };
 
@@ -108,7 +101,7 @@ export const Mensajeria = () => {
     setOpen(false);
   };
 
-  if (user.userType === "Doctor") {
+  if (user.userType === "doctor") {
     return (
       <Card
         sx={{

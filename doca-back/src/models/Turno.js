@@ -25,8 +25,11 @@ module.exports = (sequelize) => {
             },
             doctorId: {
                 type: DataTypes.UUID,
-                allowNull: false,                
-                defaultValue: DataTypes.UUIDV4,
+                allowNull: true,                
+            },
+            labId: {
+                type: DataTypes.UUID,
+                allowNull: true,                
             },
         },
         {

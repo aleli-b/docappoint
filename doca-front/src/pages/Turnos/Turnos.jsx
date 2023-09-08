@@ -62,7 +62,7 @@ export const Turnos = ({ location }) => {
 
   const getDoctor = async () => {
     try {
-      const doctorId = sessionStorage.getItem('doctorId');
+      const doctorId = sessionStorage.getItem('doctorId') || sessionStorage.getItem('labId');
       const turno = sessionStorage.getItem('turno');
       const type = sessionStorage.getItem('type');
 

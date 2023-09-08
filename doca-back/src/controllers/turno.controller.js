@@ -112,6 +112,28 @@ async function getDoctorTurno(req, res) {
   }
 }
 
+async function getLabTurno(req, res) {
+  try {
+    const { labId } = req.body;
+    const turno = await Turno.findAll({
+      where: { labId: labId, type: 'lab', },
+      include: [
+        {
+          model: User,
+          as: "paciente",
+          attributes: { exclude: ["password"] },
+        },
+      ],
+    });
+
+    if (!turno) return res.status(404).send("chpalabola");
+    return res.status(200).send(turno);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send("Ha habido un error");
+  }
+}
+
 async function deletePastTurnos(dateString) {
   try {
     const currentDateUTC = moment.utc(dateString, "YYYY-MM-DD HH:mm").toDate();
@@ -137,4 +159,5 @@ module.exports = {
   addOccupiedTurno,
   getPacienteTurno,
   getDoctorTurno,
+  getLabTurno,
 };
