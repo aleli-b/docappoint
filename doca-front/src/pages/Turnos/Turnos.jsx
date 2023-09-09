@@ -62,16 +62,16 @@ export const Turnos = ({ location }) => {
 
   const getDoctor = async () => {
     try {
-      const doctorId = sessionStorage.getItem('doctorId') || sessionStorage.getItem('labId');
+      const specialistId = sessionStorage.getItem('doctorId') || sessionStorage.getItem('labId');
       const turno = sessionStorage.getItem('turno');
       const type = sessionStorage.getItem('type');
 
-      if (!doctorId || !turno) {
+      if (!specialistId || !turno) {
         console.error("Doctor ID or turno is missing");
         return;
       }
 
-      const response = await axios.get(`${svHost}/user/${doctorId}`);
+      const response = await axios.get(`${svHost}/user/${specialistId}`);
       setDoctor(response.data);
       setTurno(turno);
       setType(type);

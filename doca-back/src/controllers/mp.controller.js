@@ -14,7 +14,7 @@ mercadopago.configure({
 const { BACK_URL, CORS_DOMAIN } = process.env;
 
 async function setPreferences(req, res) {
-  const { doctor, user, turno, type } = req.body;
+  const { doctor, lab, user, turno, type } = req.body;
   let preference = {
     items: [
       {
@@ -24,7 +24,7 @@ async function setPreferences(req, res) {
         currency_id: "ARS",
       },
     ],
-    external_reference: `${turno}_${user.id}_${doctor.id}_${doctor.email}_${type}`,
+    external_reference: `${turno}_${user.id}_${doctor ? doctor.id : lab.id}_${doctor.email}_${type}`,
     back_urls: {
       success: `${BACK_URL}/feedback`,
       failure: `${BACK_URL}/feedback`,
@@ -74,17 +74,18 @@ async function feedback(req, res) {
       Status: req.query.status,
       MerchantOrder: req.query.merchant_order_id,
       ExternalReference: req.query.external_reference,
-    };
-    console.log('ASDASDASDASDASDASD', dataPay.ExternalReference)
+    };    
     references = dataPay.ExternalReference.split("_");
+    const turnoType = references[4];
     const userData = {
+      type: references[4],
       date: references[0],
       userId: references[1],
-      doctorId: references[2],
+      [turnoType === 'doctor' ? 'doctorId' : 'labId']: references[2],
       doctorEmail: references[3],
-      type: references[4],
       paymentId: dataPay.Payment,
     };
+    console.log(userData);
     if (dataPay.Status === "approved") {
       try {
         const turnoId = await addTurno(userData);

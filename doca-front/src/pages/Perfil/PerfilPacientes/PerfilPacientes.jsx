@@ -56,7 +56,7 @@ export const PerfilPacientes = () => {
         marginY: 2,
       }}
     >
-      <Box item sx={{ width: "100%", display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", gap: 2 }}>
+      <Box sx={{ width: "100%", display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", gap: 2 }}>
         <Box sx={{ display: "flex", flexDirection: "column", width: isMobile ? "100%" : "30%", gap: 3 }}>
           <Card
             className="patientCard"

@@ -7,30 +7,30 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT } = process.env;
 let sequelize =
   process.env.NODE_ENV === "production"
     ? new Sequelize({
-        database: DB_NAME,
-        dialect: "postgres",
-        host: DB_HOST,
-        port: DB_PORT,
-        username: DB_USER,
-        password: DB_PASSWORD,
-        pool: {
-          max: 3,
-          min: 1,
-          idle: 10000,
+      database: DB_NAME,
+      dialect: "postgres",
+      host: DB_HOST,
+      port: DB_PORT,
+      username: DB_USER,
+      password: DB_PASSWORD,
+      pool: {
+        max: 3,
+        min: 1,
+        idle: 10000,
+      },
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
         },
-        dialectOptions: {
-          ssl: {
-            require: true,
-            rejectUnauthorized: false,
-          },
-          keepAlive: true,
-        },
-        ssl: true,
-      })
+        keepAlive: true,
+      },
+      ssl: true,
+    })
     : new Sequelize(
-        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, //DB NAME countries
-        { logging: false, native: false }
-      );
+      `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, //DB NAME countries
+      { logging: false, native: false }
+    );
 
 const basename = path.basename(__filename);
 
@@ -61,8 +61,19 @@ const { User, Turno, Message, Conversation, Labtest, Pago, Valoraciones, Subscri
 
 
 User.hasMany(Turno, { as: "turno", foreignKey: "userId" });
-Turno.belongsTo(User, { as: "doctor", foreignKey: "doctorId" });
-Turno.belongsTo(User, { as: "lab", foreignKey: "labId" });
+Turno.belongsTo(User, {
+  as: "doctor",
+  foreignKey: "doctorId",
+  constraints: false, 
+  allowNull: true,    
+});
+
+Turno.belongsTo(User, {
+  as: "lab",
+  foreignKey: "labId",
+  constraints: false, 
+  allowNull: true,    
+});
 Turno.belongsTo(User, { as: "paciente", foreignKey: "userId" });
 
 User.hasMany(Message, { as: "sentMessages", foreignKey: "senderId" });
@@ -147,7 +158,7 @@ Valoraciones.belongsTo(Turno, {
   as: "turno"
 })
 
-Turno.hasOne(Valoraciones,{
+Turno.hasOne(Valoraciones, {
   foreignKey: "turnoId",
   as: "valoracion"
 })
@@ -157,11 +168,11 @@ Valoraciones.belongsTo(User, { foreignKey: 'userId', as: "user" });
 User.hasMany(Valoraciones, { foreignKey: 'userId', as: "reseñas" });
 
 
-User.hasMany(Subscriptions, {foreignKey: "userId", as:"suscripcion"})
-Subscriptions.belongsTo(User, {foreignKey: "userId", as:"user"})
+User.hasMany(Subscriptions, { foreignKey: "userId", as: "suscripcion" })
+Subscriptions.belongsTo(User, { foreignKey: "userId", as: "user" })
 
-Vendedor.hasMany(User, {foreignKey: "userId", as:"doctor"})
-User.belongsTo(Vendedor, {foreignKey: "userId", as:"vendedor"})
+Vendedor.hasMany(User, { foreignKey: "userId", as: "doctor" })
+User.belongsTo(Vendedor, { foreignKey: "userId", as: "vendedor" })
 
 
 

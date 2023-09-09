@@ -8,15 +8,17 @@ import { toast } from "react-toastify";
 import moment from "moment-timezone";
 import { useNavigate } from "react-router-dom";
 
-export const LabTurnoModal = ({ open, onClose, lab }) => {
+export const LabTurnoModal = ({ open, onClose, lab, labLoaded, }) => {
     const [startIndex, setStartIndex] = useState(0);
     const [numColumns, setNumColumns] = useState(4);
     const [turnos, setTurnos] = useState([]);
 
 
     useEffect(() => {
-        getTurnos();
-    }, [])
+        if (labLoaded) {
+            getTurnos();
+        }
+    }, [labLoaded])
 
     const svHost = import.meta.env.VITE_HOST;
     const { user } = useAuth();
@@ -117,7 +119,7 @@ export const LabTurnoModal = ({ open, onClose, lab }) => {
 
     const isTurnoOccupied = (dateTime) => {
         const occupied = turnos.find((turno) => {
-            return turno.date === dateTime && turno.doctorId === doctor.id;
+            return turno.date === dateTime && turno.labId === laboratorio.id;
         });
         return occupied ? true : false;
     };

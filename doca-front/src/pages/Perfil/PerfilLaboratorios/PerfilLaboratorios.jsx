@@ -39,7 +39,7 @@ export const PerfilLaboratorios = () => {
                 <Grid sx={{ display: "flex", flexDirection: "column", gap: 3 }} item md={4} xs={12} >
                     <Card>
                         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, justifyContent: 'center' }}>
-                            <CardMedia                                
+                            <CardMedia
                                 sx={{
                                     display: 'flex',
                                     justifyContent: 'center',
@@ -128,11 +128,21 @@ export const PerfilLaboratorios = () => {
                                 </Box>
                             </Box>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', borderBottom: 'solid white 1px', padding: '18.7px' }}>
-                                {/* <Typography>Notificaciones:
-                                    <FormControlLabel
-                                        sx={{ borderBottom: 'solid white 1px', padding: '18.7px' }}
-                                        control={<Checkbox defaultChecked />} label="Recibir" />
-                                </Typography> */}
+                                <Typography>Precio de Consulta:</Typography>
+                                <Box sx={{ width: '25%' }}>
+                                    <Stack spacing={2}>
+                                        <Item>
+                                            {'$' + user.price || 'No has añadido un precio'}
+                                            <Button onClick={() => {
+                                                setFieldToEdit('price');
+                                                setNewValue(user.price || '');
+                                                setEditing(true);
+                                            }}>
+                                                <EditIcon />
+                                            </Button>
+                                        </Item>
+                                    </Stack>
+                                </Box>
                             </Box>
                         </CardContent>
                     </Card>

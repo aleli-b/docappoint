@@ -60,7 +60,7 @@ export const Mensajeria = () => {
     } else if (user.userType === 'patient'){
       turnoData = await axios.post(`${svHost}/user-turnos`, { userId: user.id });
     } else {
-      turnoData = await axios.get(`${svHost}/doctors`);
+      turnoData = await axios.post(`${svHost}/lab-turnos`, { labId: user.id });
     }
     if (user.userType === 'doctor'){
       setUsers(turnoData.data);
@@ -247,7 +247,7 @@ export const Mensajeria = () => {
                   onChange={handleChange}
                   label="asdasd"
                 >
-                  {
+                  {/* {
                     doctors.length > 0 ?
                     doctors.map((doctor) => (
                     <MenuItem
@@ -258,7 +258,7 @@ export const Mensajeria = () => {
                   :
                   <MenuItem disabled>
                     <Typography>No tienes turno con doctores</Typography>
-                  </MenuItem>}
+                  </MenuItem>} */}
                 </Select>
                 <TextField
                   label="Type your message"

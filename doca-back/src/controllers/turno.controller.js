@@ -17,40 +17,51 @@ async function getOccupiedTurnos(req, res) {
 }
 
 async function addTurno(userData) {
-  const { date, userId, doctorId, type } = userData;
-  console.log("primera", date);
-  console.log(userId, doctorId);
+  const { date, userId, doctorId, labId, type } = userData;  
+  console.log(date, userId, doctorId, labId, type)
   try {
     const pacienteHasTurno = await Turno.findOne({
       where: { userId },
       include: "paciente",
     });
-    const doctorCheck = await Turno.findOne({
-      where: { doctorId },
-      include: "doctor",
-    });
+    if (doctorId) {
+      const doctorCheck = await Turno.findOne({
+        where: { doctorId },
+        include: "doctor",
+      });
+      if (doctorCheck && date === doctorCheck.date) {
+        console.log("The Doctor already has a turno");
+        return ("The Doctor already has a turno");
+      }
+    } else {
+      const labCheck = await Turno.findOne({
+        where: { labId },
+        include: "lab",
+      });
 
-    if (doctorCheck && date === doctorCheck.date) {
-      console.log("The Doctor already has a turno");
-      return("The Doctor already has a turno");
+
+      if (labCheck && date === labCheck.date) {
+        console.log("The Lab already has a turno");
+        return ("The Lab already has a turno");
+      }
     }
 
-    if (pacienteHasTurno) {
-      console.log("The User already has a turno");
-      return("The User already has a turno");
-    }
+    // if (pacienteHasTurno) {
+    //   console.log("The User already has a turno");
+    //   return ("The User already has a turno");
+    // }
 
-    const turno = await Turno.create({ date, userId, doctorId, type });
-    return(turno.id);
+    const turno = await Turno.create({ date, userId, doctorId, labId, type });
+    return (turno.id);
   } catch (error) {
-    // console.error(error);
-    return("Error creating turno");
+    console.error(error);
+    return ("Error creating turno");
   }
 }
 
 async function addOccupiedTurno(req, res) {
   const { date, userId, doctorId } = req.body;
-  try {    
+  try {
 
     const doctorCheck = await Turno.findOne({
       where: { doctorId },
@@ -58,7 +69,7 @@ async function addOccupiedTurno(req, res) {
 
     if (doctorCheck && date === doctorCheck.date) {
       return res.status(403).send("El doctor ya tiene turno para este horario.");
-    }  
+    }
 
     const turno = await Turno.create({ date, userId, doctorId });
     return res.status(200).send(turno.id);

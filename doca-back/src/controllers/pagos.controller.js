@@ -10,7 +10,7 @@ async function setPago(userData, turnoId) {
     const pago = await Pago.create({ paymentId, turnoId: turnoId });
     return;
   } catch (error) {
-    console.error(error);
+    return;
   }
 }
 
