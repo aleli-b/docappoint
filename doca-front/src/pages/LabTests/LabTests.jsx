@@ -110,12 +110,19 @@ export const LabTests = () => {
                                                         <Typography>{labtest.labtestDoctor.category}</Typography>
                                                     </Box>
                                                     <Box>
-                                                        <a href={labtest.lab_test_url} style={{ textDecoration: 'none'}}>
+                                                        {labtest.lab_test_url
+                                                            ?
+                                                            <a href={labtest.lab_test_url} style={{ textDecoration: 'none' }}>
+                                                                <Box sx={{ display: 'flex', gap: 1, }}>
+                                                                    <PictureAsPdfIcon sx={{ color: 'red', }} />
+                                                                    <Typography sx={{ textDecoration: 'none', "&:hover": { color: 'red', fontWeight: 'bold', transition: '20px 2s', }, }}>Vea su analisis</Typography>
+                                                                </Box>
+                                                            </a>
+                                                            :
                                                             <Box sx={{ display: 'flex', gap: 1, }}>
-                                                                <PictureAsPdfIcon sx={{ color: 'red', }} />
-                                                                <Typography sx={{ textDecoration: 'none', "&:hover": {color: 'red', fontWeight: 'bold', transition: '20px 2s', }, }}>Vea su analisis</Typography>
+                                                                <Typography sx={{}}>Pendiente de subida</Typography>
                                                             </Box>
-                                                        </a>
+                                                        }
                                                     </Box>
                                                 </Box>
                                             </AccordionDetails>

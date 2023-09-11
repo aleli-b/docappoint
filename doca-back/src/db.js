@@ -57,10 +57,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { User, Turno, Message, Conversation, Labtest, Pago, Valoraciones, Subscriptions, Vendedor, } =
   sequelize.models;
 
-
-
-
 User.hasMany(Turno, { as: "turno", foreignKey: "userId" });
+User.hasMany(Turno, { as: "doctorTurno", foreignKey: "doctorId" });
+User.hasMany(Turno, { as: "labTurno", foreignKey: "labId" });
 Turno.belongsTo(User, {
   as: "doctor",
   foreignKey: "doctorId",
@@ -148,11 +147,6 @@ Turno.hasOne(Pago, {
   as: "payTurno",
 });
 
-Labtest.belongsTo(Turno)
-
-Turno.hasMany(Labtest)
-
-
 Valoraciones.belongsTo(Turno, {
   foreignKey: "turnoId",
   as: "turno"
@@ -166,7 +160,6 @@ Turno.hasOne(Valoraciones, {
 Valoraciones.belongsTo(User, { foreignKey: 'userId', as: "user" });
 
 User.hasMany(Valoraciones, { foreignKey: 'userId', as: "reseñas" });
-
 
 User.hasMany(Subscriptions, { foreignKey: "userId", as: "suscripcion" })
 Subscriptions.belongsTo(User, { foreignKey: "userId", as: "user" })

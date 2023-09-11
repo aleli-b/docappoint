@@ -13,10 +13,25 @@ async function getLabtests(req, res) {
         if (userId) {
             test = await Labtest.findAll({
                 where: {
-                    userId: userId
+                  userId: userId
                 },
-                include: ["labtestDoctor", "labtestLab"],
-            });
+                include: [
+                  {
+                    model: User,
+                    as: "labtestDoctor"
+                  },
+                  {
+                    model: User,
+                    as: "labtestLab",
+                    include: [
+                      {
+                        model: Turno,
+                        as: "labTurno"
+                      }
+                    ]
+                  }
+                ]
+              });
         } else if (doctorId) {
             test = await Labtest.findAll({
                 where: {

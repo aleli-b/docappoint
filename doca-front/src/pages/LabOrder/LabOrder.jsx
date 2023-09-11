@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Container, List, ListItem, Typography, useMediaQuery } from '@mui/material'
+import { Box, Button, CircularProgress, Container, List, ListItem, Typography, useMediaQuery } from '@mui/material'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../components/context/AuthContext';
 import { OrderModal } from '../../components/OrderModal/OrderModal';
+import { LabtestRender } from '../../components/LabtestRender/LabtestRender';
 
 export const LabOrder = () => {
   const [turnos, setTurnos] = useState([]);
   const [open, setOpen] = useState(false);
   const [patient, setPatient] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getTurnos();
@@ -21,19 +23,35 @@ export const LabOrder = () => {
     try {
       const backTurnos = await axios.post(`${svHost}/doctor-turnos`, { doctorId: user.id })
       setTurnos(backTurnos.data);
+      setLoading(false);
     } catch (error) {
       toast.error('Ha ocurrido un error, inténtenlo de nuevo más tarde')
+      setLoading(false);
     }
   }
 
-  const handleClick = async () => {
-    const userId = '2f66b085-1b03-4848-a99e-c7bea08805db';
-    const doctorId = '1d52abf0-8449-43ba-8871-aea4b353fa55';
-    const labId = 'c2ed4885-9031-413a-bddd-f2ddef87a4f6';
-    await axios.post(`${svHost}/labtests`, { userId: userId, doctorId: doctorId, labId: labId, })
-  }
-
   const isMobile = useMediaQuery("(max-width: 900px)");
+
+  if (loading) {
+    return (
+      <Container>
+        <Typography
+          sx={{
+            fontFamily: "work sans",
+            fontWeight: "bold",
+            color: "#145C6C",
+            fontSize: isMobile ? "2.5rem" : "2rem",
+            textAlign: isMobile ? "center" : "left",
+          }}
+        >
+          Pedidos de Análisis
+        </Typography>
+        <Container sx={{ minHeight: '100dvh', display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
+          <CircularProgress />
+        </Container>
+      </Container>
+    )
+  }
 
   return (
     <Container sx={{ minHeight: '100dvh', }}>
@@ -48,6 +66,8 @@ export const LabOrder = () => {
       >
         Pedidos de Análisis
       </Typography>
+      <LabtestRender />
+      <Typography variant='h4' gutterBottom sx={{ color: '#145C6C', fontWeight: 'bold', }}>Hacer un Pedido</Typography>
       <Box>
         <Typography>Seleccione un paciente:</Typography>
         {turnos.length > 0
@@ -55,7 +75,7 @@ export const LabOrder = () => {
           <List>
             {turnos.map((turno, i) => (
               <ListItem key={i} >
-                <Button onClick={() => {setPatient(turno); setOpen(true)}} sx={{ '&:hover': { outline: 'solid 1px red' }, }}>
+                <Button onClick={() => { setPatient(turno); setOpen(true) }} sx={{ '&:hover': { outline: 'solid 1px red' }, }}>
                   {turno.paciente.name} {turno.paciente.lastName}
                 </Button>
               </ListItem>

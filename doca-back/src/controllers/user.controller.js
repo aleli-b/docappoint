@@ -47,7 +47,6 @@ async function getLabs(req, res) {
             userType: 'lab'
         }
     });
-    console.log(userDB)
     return res.status(200).json(userDB)
 }
 
