@@ -169,7 +169,6 @@ export const PerfilPacientes = () => {
               display: "flex",
               flexDirection: "row",
               justifyContent: "space-between",
-              borderBottom: 'solid gray 1px',
               p: 1,
               alignItems: "center"
             }}

@@ -17,9 +17,8 @@ import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-export const UploadTestModal = ({ open, onClose, users, getLabtests }) => {
-    const [selectedDoctor, setSelectedDoctor] = useState('');
-    const [selectedUser, setSelectedUser] = useState('');
+export const UploadTestModal = ({ open, onClose, users, labtests, getLabtests }) => {
+    const [selectedLabtest, setSelectedLabtest] = useState('');    
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -49,7 +48,7 @@ export const UploadTestModal = ({ open, onClose, users, getLabtests }) => {
             const file = event.target.files[0];
             setLoading(true);
             const base64 = await convertBase64(file)
-            const response = await axios.post(`${svHost}/labtests`, { file: base64, filename: 'test.pdf', labId: user.id, doctorId: selectedDoctor, userId: selectedUser })
+            const response = await axios.patch(`${svHost}/labtests`, { file: base64, filename: 'test.pdf', id: selectedLabtest, })
                 .then(() => {
                     toast.success('PDF subido con exito, los cambios se efectuarán la próxima vez que inicie sesión.');
                 })
@@ -64,50 +63,29 @@ export const UploadTestModal = ({ open, onClose, users, getLabtests }) => {
         }
     }
 
-
-    const handleSelectDoctorChange = (event) => {
-        setSelectedDoctor(event.target.value);
-    };
-
-    const handleSelectChange = (event) => {
-        setSelectedUser(event.target.value);
-    }
+    const handleSelectLabtestChange = (event) => {
+        setSelectedLabtest(event.target.value);
+    };    
 
     return (
         <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Sube tus estudios</DialogTitle>
             <DialogContent>
-                <InputLabel id="user-label">Selecciona un usuario</InputLabel>
+                <InputLabel id="user-label">Selecciona un analisis</InputLabel>
                 <Select
                     labelId="user-label"
                     id="user-select"
-                    value={selectedDoctor}
-                    onChange={handleSelectDoctorChange}
+                    value={selectedLabtest}
+                    onChange={handleSelectLabtestChange}
                     label="Selecciona un usuario"
                     style={{ minWidth: '200px' }}
                 >
-                    {users.map((user) => (
-                        user.userType === 'doctor' &&
-                        <MenuItem key={user.id} value={user.id}>
-                            Dr. {user.name} {user.lastName}
+                    {labtests.map((test, i) => (                        
+                        <MenuItem key={test.id} value={test.id}>
+                            Analisis {i + 1}: Dr. {test.labtestDoctor.name} {test.labtestDoctor.lastName}, paciente: {test.labtestPatient.name} {test.labtestPatient.lastName}
                         </MenuItem>
                     ))}
-                </Select>
-                <Select
-                    labelId="user-label"
-                    id="user-select"
-                    value={selectedUser}
-                    onChange={handleSelectChange}
-                    label="Selecciona un paciente"
-                    style={{ minWidth: '200px' }}
-                >
-                    {users.map((user) => (
-                        user.userType === 'patient' &&
-                        <MenuItem key={user.id} value={user.id}>
-                            {user.name} {user.lastName}
-                        </MenuItem>
-                    ))}
-                </Select>
+                </Select>                
                 <input
                 type="file"
                 style={{ display: 'none' }}

@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext';
 
 export const TurnosCardPacientes = () => {
   const [turnos, setTurnos] = useState([]);
-  
+
   const svHost = import.meta.env.VITE_HOST;
 
   const auth = useAuth();
@@ -17,11 +17,6 @@ export const TurnosCardPacientes = () => {
         userId: auth.user.id
       })
       if (response.status === 200) {
-        // const backendTurnos = response.data.map((turno, i) => {
-        //   const formattedDate = moment(turno.date).format('DD [de] MMMM');
-        //   const hour = moment(turno.date).format('HH:mm');
-        //   return { id: response.data[i].id, dateTime: `${formattedDate} ${hour}`, name: response.data[i].doctor };
-        // });
         setTurnos(response.data)
       } else {
         console.log('Failed to fetch occupied turnos:', response.status);
@@ -36,18 +31,24 @@ export const TurnosCardPacientes = () => {
   }, [])
 
   return (
-    <Card sx={{minHeight: '100%'}}>
+    <Card sx={{ minHeight: '100%' }}>
       <CardContent>
         <Typography variant="h6" component="div">
           Turnos Ocupados
         </Typography>
         <List sx={{ maxHeight: '176px', overflowY: 'auto', }}>
           {turnos.length > 0 ? (
-            turnos.map((turno) => (
-              <ListItem key={turno.id}>
-                <ListItemText primary={turno.date} secondary={turno.doctor ? `Con el Doctor: ${turno.doctor.name} ${turno.doctor.lastName}, ${turno.doctor.category}` : 'Doctor no encontrado'} />
-              </ListItem>
-            ))
+            turnos.map((turno) => 
+              turno.type === 'doctor'
+                ?
+                (<ListItem key={turno.id}>
+                  <ListItemText primary={turno.date} secondary={turno.doctor ? `Con el Doctor: ${turno.doctor.name} ${turno.doctor.lastName}, ${turno.doctor.category}` : 'Doctor no encontrado'} />
+                </ListItem>)
+                :
+                (<ListItem key={turno.id}>
+                  <ListItemText primary={turno.date} secondary={turno.lab ? `Con el Laboratorio: ${turno.lab.name} ${turno.lab.lastName}, ${turno.lab.lab_category}` : 'Laboratorio no encontrado'} />
+                </ListItem>)            
+            )
           ) : (
             <Typography>No hay turnos</Typography>
           )}

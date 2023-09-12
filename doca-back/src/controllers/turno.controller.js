@@ -90,7 +90,12 @@ async function getPacienteTurno(req, res) {
           as: "doctor",
           attributes: { exclude: ["password"] },
         },
-      ],
+        {
+          model: User,
+          as: "lab",
+          attributes: { exclude: ["password"] },
+        },
+      ],      
     });
 
     if (!turno) return res.status(404).send("chpalabola");
@@ -126,8 +131,9 @@ async function getDoctorTurno(req, res) {
 async function getLabTurno(req, res) {
   try {
     const { labId } = req.body;
+    console.log('labId: ',labId)
     const turno = await Turno.findAll({
-      where: { labId: labId, type: 'lab', },
+      where: { labId: labId, },
       include: [
         {
           model: User,
@@ -138,6 +144,7 @@ async function getLabTurno(req, res) {
     });
 
     if (!turno) return res.status(404).send("chpalabola");
+    console.log('turno: ', turno)
     return res.status(200).send(turno);
   } catch (error) {
     console.log(error);

@@ -23,8 +23,6 @@ export const AnalisisCard = () => {
     setLabtests(backLabtests.data);
   }
 
-  console.log(labtests)
-
   const handleOpen = () => {
     setLabLoaded(true);
     setOpen(true);

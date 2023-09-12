@@ -7,6 +7,6 @@ router.get('/labtests', labtestController.getLabtests);
 
 router.post('/labtests', labtestController.addOrder);
 
-// router.post('/labtests', labtestController.uploadLabtest);
+router.patch('/labtests', labtestController.uploadLabtest);
 
 module.exports = router;

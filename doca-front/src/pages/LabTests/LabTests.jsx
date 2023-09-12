@@ -134,7 +134,7 @@ export const LabTests = () => {
                     </Box>
                 </Grid>
             </Grid>
-            <UploadTestModal open={openModal} onClose={handleCloseModal} users={users} getLabtests={getLabtests} />
+            <UploadTestModal open={openModal} onClose={handleCloseModal} users={users} labtests={labtests} getLabtests={getLabtests} />
         </Container >
     )
 }

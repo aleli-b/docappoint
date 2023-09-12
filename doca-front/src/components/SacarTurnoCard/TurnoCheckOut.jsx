@@ -38,6 +38,9 @@ export function TurnoCheckOut({ doctor, turno, type, }) {
         { headers: { authorization: token } }
       )
       .then(
+        sessionStorage.clear()
+      )
+      .then(
         (response) =>
           (window.location.href = response.data.response.body.init_point
             ? response.data.response.body.init_point

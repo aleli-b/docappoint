@@ -78,15 +78,11 @@ async function addOrder(req, res) {
 
 async function uploadLabtest(req, res) {
     try {
-        const { labId, userId, doctorId, } = req.body;
+        const { id } = req.body;
+        console.log('sarasaaaa:', id)
         const url = await aws_upload_pdf(req.body);
-        const labtest = new Labtest({
-            lab_test_url: url.url,
-            labId: labId,
-            userId: userId,
-            doctorId: doctorId,
-        })
-        await labtest.save();
+        const labtest = await Labtest.findByPk(id);
+        await labtest.update({lab_test_url: url.url});
         return res.status(200).send('SUBIDO PDF');
     } catch (error) {
         console.log(error);

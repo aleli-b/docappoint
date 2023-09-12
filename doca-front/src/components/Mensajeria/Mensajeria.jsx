@@ -207,6 +207,8 @@ export const Mensajeria = () => {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
+      justifyContent: 'center',
+      flexGrow: 1,
       gap: 2,
       width: "100%",
       p: 2,
