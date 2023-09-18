@@ -56,6 +56,11 @@ export const ManualTurnoModal = ({ openManualTurno, closeManualTurno }) => {
 
     const handleSubmit = async () => {
         try {
+            if (!selectedDay || !selectedMonth || !selectedHour || !selectedMinute) {
+                toast.error('Falta información, revisa todos los campos.');
+                return;
+            }
+
             const response = await axios.post(`${svHost}/occupied-turnos`, {
                 userId: user.id,
                 doctorId: user.id,

@@ -22,6 +22,7 @@ import {
   IconButton,
 } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { toast } from "react-toastify";
 
 export const RegisterFormDoc = () => {
   const [firstName, setFirstName] = React.useState("");
@@ -82,6 +83,12 @@ export const RegisterFormDoc = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (!firstName || !lastName || !age || !email || !password || !confirmPassword || !category || !province) {
+      toast.error('Por favor, completa todos los campos.');
+      return;
+    }
+
     if (!emailError && !passwordError) {
       const formData = new FormData(event.currentTarget);
       const data = {
@@ -128,6 +135,8 @@ export const RegisterFormDoc = () => {
     "Radiología",
     "Urología",
   ];
+
+  const currentDate = new Date().toISOString().split("T")[0];
 
   return (
     <Container
@@ -200,7 +209,7 @@ export const RegisterFormDoc = () => {
             onChange={(e) => validateAge(e.target.value)}
             value={age}
             margin="normal"
-            isRequired
+            required
             fullWidth
             id="age"
             name="age"
@@ -208,6 +217,9 @@ export const RegisterFormDoc = () => {
             placeholder="Fecha de nacimiento"
             onFocus={() => handleType()}
             autoComplete="family-name"
+            inputProps={{
+              max: currentDate,
+            }}
             sx={{
               bgcolor: "rgba(131, 131, 131, 0.22)",
               mb: 3,

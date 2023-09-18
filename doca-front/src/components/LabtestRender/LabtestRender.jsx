@@ -30,11 +30,17 @@ export const LabtestRender = () => {
         setLabtests(dbLabtests.data);
     };
 
+    const formatDate = (dateString) => {
+        const [year, month, day] = dateString.split('T')[0].split('-');
+        return `${day}/${month}/${year}`;
+    };
+
+    const capitalizeFirstLetter = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    };
+
     return (
         <Grid container direction={'column'}>
-            <Grid item>
-                <Typography variant='h4' gutterBottom sx={{ color: '#145C6C', fontWeight: 'bold', }}>Estudios</Typography>
-            </Grid>
             <Grid item>
                 <Box>
                     <List>
@@ -76,7 +82,10 @@ export const LabtestRender = () => {
                                                     {labtest.labtestPatient.name} {labtest.labtestPatient.lastName}
                                                 </Typography>
                                                 <Typography>
-                                                    {labtest.labtestLab.name} {labtest.labtestLab.lastName}
+                                                    {formatDate(labtest.createdAt)}
+                                                </Typography>
+                                                <Typography>
+                                                    {capitalizeFirstLetter(labtest.labtestLab.lab_category)}
                                                 </Typography>
                                                 <SvgIcon component={ExpandMoreIcon} inheritViewBox />
                                             </Container>
@@ -86,7 +95,7 @@ export const LabtestRender = () => {
                                                 {labtest.lab_test_url
                                                     ?
                                                     <Box sx={{ display: 'flex', gap: 2 }}>
-                                                        <Typography>Fecha de subida: {labtest.createdAt.split('T')[0]}</Typography>
+                                                        <Typography>Fecha de subida: {formatDate(labtest.createdAt)}</Typography>
                                                         <Typography>Hora: {labtest.createdAt.split('T')[1].split('.')[0].slice(0, -3)}</Typography>
                                                     </Box>
                                                     :
@@ -99,21 +108,21 @@ export const LabtestRender = () => {
                                                     <Typography>Paciente: {labtest.labtestPatient.name} {labtest.labtestPatient.lastName}</Typography>
                                                 </Box>
                                                 <Box sx={{ display: 'flex', gap: 2 }}>
-                                                    <Typography>Laboratorio: {labtest.labtestLab.name} {labtest.labtestLab.lastName}</Typography>
+                                                    <Typography>Laboratorio: {labtest.labtestLab.name} {labtest.labtestLab.lastName} ({capitalizeFirstLetter(labtest.labtestLab.lab_category)})</Typography>
                                                     <Typography>{labtest.labtestLab.category}</Typography>
                                                 </Box>
                                                 <Box>
-                                                {labtest.lab_test_url 
-                                                ?
-                                                    <a href={labtest.lab_test_url} style={{ textDecoration: 'none' }}>
-                                                        <Box sx={{ display: 'flex', gap: 1, }}>
-                                                            <PictureAsPdfIcon sx={{ color: 'red', }} />
-                                                            <Typography sx={{ textDecoration: 'none', "&:hover": { color: 'red', fontWeight: 'bold', transition: '20px 2s', }, }}>Vea su analisis</Typography>
-                                                        </Box>
-                                                    </a>
-                                                :
-                                                <Typography>Análisis pendiente</Typography>
-                                                }
+                                                    {labtest.lab_test_url
+                                                        ?
+                                                        <a href={labtest.lab_test_url} style={{ textDecoration: 'none' }}>
+                                                            <Box sx={{ display: 'flex', gap: 1, }}>
+                                                                <PictureAsPdfIcon sx={{ color: 'red', }} />
+                                                                <Typography sx={{ textDecoration: 'none', "&:hover": { color: 'red', fontWeight: 'bold', transition: '20px 2s', }, }}>Vea su analisis</Typography>
+                                                            </Box>
+                                                        </a>
+                                                        :
+                                                        <Typography>Análisis pendiente</Typography>
+                                                    }
                                                 </Box>
                                             </Box>
                                         </AccordionDetails>

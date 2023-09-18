@@ -34,11 +34,11 @@ export const LabOrder = () => {
 
   if (loading) {
     return (
-      <Container>
+      <Container sx={{ mt: 6, }}>
         <Typography
           sx={{
             fontFamily: "work sans",
-            fontWeight: "bold",
+            fontWeight: "700",
             color: "#145C6C",
             fontSize: isMobile ? "2.5rem" : "2rem",
             textAlign: isMobile ? "center" : "left",
@@ -54,37 +54,50 @@ export const LabOrder = () => {
   }
 
   return (
-    <Container sx={{ minHeight: '100dvh', }}>
-      <Typography
-        sx={{
+    <Container sx={{ minHeight: '100dvh', mt: 6, }}>
+      <Box>
+
+        <Typography
+          sx={{
+            fontFamily: "work sans",
+            fontWeight: "700",
+            color: "#145C6C",
+            fontSize: isMobile ? "2.5rem" : "2rem",
+            textAlign: isMobile ? "center" : "left",
+          }}
+        >
+          Pedidos de Análisis
+        </Typography>
+        <LabtestRender />
+      </Box>
+      <Box sx={{ mt: 6,}}>
+        <Typography sx={{
           fontFamily: "work sans",
-          fontWeight: "bold",
+          fontWeight: "700",
           color: "#145C6C",
           fontSize: isMobile ? "2.5rem" : "2rem",
           textAlign: isMobile ? "center" : "left",
-        }}
-      >
-        Pedidos de Análisis
-      </Typography>
-      <LabtestRender />
-      <Typography variant='h4' gutterBottom sx={{ color: '#145C6C', fontWeight: 'bold', }}>Hacer un Pedido</Typography>
-      <Box>
-        <Typography>Seleccione un paciente:</Typography>
-        {turnos.length > 0
-          ?
-          <List>
-            {turnos.map((turno, i) => (
-              <ListItem key={i} >
-                <Button onClick={() => { setPatient(turno); setOpen(true) }} sx={{ '&:hover': { outline: 'solid 1px red' }, }}>
-                  {turno.paciente.name} {turno.paciente.lastName}
-                </Button>
-              </ListItem>
-            ))}
-          </List>
-          :
-          <Typography>No tienes turnos</Typography>
-        }
+        }}>
+          Realizar un Pedido
+        </Typography>
+        <Box>
+          <Typography>Seleccione un paciente:</Typography>
+          {turnos.length > 0
+            ?
+            <List>
+              {turnos.map((turno, i) => (
+                <ListItem key={i} >
+                  <Button onClick={() => { setPatient(turno); setOpen(true) }} sx={{ '&:hover': { outline: 'solid 1px red' }, }}>
+                    {turno.paciente.name} {turno.paciente.lastName}
+                  </Button>
+                </ListItem>
+              ))}
+            </List>
+            :
+            <Typography>No tienes turnos</Typography>
+          }
 
+        </Box>
       </Box>
       <OrderModal open={open} onClose={() => setOpen(false)} patient={patient} />
     </Container>

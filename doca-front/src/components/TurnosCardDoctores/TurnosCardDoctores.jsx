@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useAuth } from '../context/AuthContext';
 import { ManualTurnoModal } from '../ManuallTurnoModal/ManualTurnoModal';
 
-export const TurnosCardDoctores = () => {
+export const TurnosCardDoctores = ({ isSubscribed, isVerified, }) => {
   const [turnos, setTurnos] = useState([]);
   const [openManualTurno, setOpenManualTurno] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -46,7 +46,7 @@ export const TurnosCardDoctores = () => {
           <Typography variant="h6" component="div">
             Turnos Reservados
           </Typography>
-          <Button onClick={handleOpen}>
+          <Button onClick={handleOpen} disabled={!isSubscribed && !isVerified}>
             Agregar Turno
           </Button>
         </Box>

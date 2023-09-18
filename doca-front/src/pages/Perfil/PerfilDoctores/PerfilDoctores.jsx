@@ -308,7 +308,7 @@ export const PerfilDoctores = () => {
                     <ReseñasCard />
                 </Grid> */}
         <Grid item md={8} xs={12}>
-          <TurnosCardDoctores />
+          <TurnosCardDoctores isSubscribed={user.subscription} isVerified={user.cedulaVerified} />
         </Grid>
       </Grid>
 

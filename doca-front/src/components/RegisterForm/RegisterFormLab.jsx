@@ -21,6 +21,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { toast } from "react-toastify";
 
 export const RegisterFormLab = () => {
   const [firstName, setFirstName] = React.useState("");
@@ -81,6 +82,12 @@ export const RegisterFormLab = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (!firstName || !lastName || !age || !email || !password || !confirmPassword || !category || !province) {
+      toast.error('Por favor, completa todos los campos.');
+      return;
+    }
+
     if (!emailError && !passwordError) {
       const formData = new FormData(event.currentTarget);
       const data = {
@@ -97,6 +104,8 @@ export const RegisterFormLab = () => {
       auth.register(data);
     }
   };
+
+  const currentDate = new Date().toISOString().split("T")[0];
 
   return (
     <Container
@@ -175,6 +184,9 @@ export const RegisterFormLab = () => {
             placeholder="Fecha de nacimiento"
             onFocus={()=> handleType()}
             autoComplete="family-name"
+            inputProps={{
+              max: currentDate,
+            }}
             sx={{
               bgcolor: "rgba(131, 131, 131, 0.22)",
               mb: 3,

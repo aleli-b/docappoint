@@ -51,7 +51,7 @@ export const RegisterForm = () => {
     }
   };
 
-  const handleType = () =>{
+  const handleType = () => {
     setType("date")
   }
 
@@ -78,6 +78,12 @@ export const RegisterForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (!firstName || !lastName || !age || !email || !password || !confirmPassword || !province) {
+      toast.error('Por favor, completa todos los campos.');
+      return;
+    }
+
     if (!emailError && !passwordError) {
       const formData = new FormData(event.currentTarget);
       const data = {
@@ -93,6 +99,9 @@ export const RegisterForm = () => {
       auth.register(data);
     }
   };
+
+  const currentDate = new Date().toISOString().split("T")[0];
+
   return (
     <Container
       component="main"
@@ -148,14 +157,17 @@ export const RegisterForm = () => {
             onChange={(e) => validateAge(e.target.value)}
             value={age}
             margin="normal"
-            isRequired
+            required
             fullWidth
             id="age"
             name="age"
             type={type}
             placeholder="Fecha de nacimiento"
-            onFocus={()=> handleType()}
+            onFocus={() => handleType()}
             autoComplete="family-name"
+            inputProps={{
+              max: currentDate,
+            }}
             sx={{
               bgcolor: "rgba(131, 131, 131, 0.22)",
               mb: 3,
