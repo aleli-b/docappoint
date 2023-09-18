@@ -169,6 +169,8 @@ export const AuthProvider = ({ children }) => {
           theme: "light",
         }
       );
+      const updatedUser = await axios.get(`${svHost}/user/${user.id}`);
+      setUser(updatedUser.data)
     } catch (error) {
       console.error(error);
       toast.error("Ha habido un error.", {
