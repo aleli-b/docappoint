@@ -213,7 +213,7 @@ export const RegisterFormDoc = () => {
             fullWidth
             id="age"
             name="age"
-            type={type}
+            type="date"
             placeholder="Fecha de nacimiento"
             onFocus={() => handleType()}
             autoComplete="family-name"
