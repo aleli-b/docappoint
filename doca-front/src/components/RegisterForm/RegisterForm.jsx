@@ -22,6 +22,8 @@ import {
   Container,
   Button,
 } from "@mui/material";
+import { toast } from "react-toastify";
+
 
 export const RegisterForm = () => {
   const [firstName, setFirstName] = React.useState("");
@@ -76,11 +78,36 @@ export const RegisterForm = () => {
     setPasswordMatchError(value !== password);
   };
 
+  function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Adding 1 because January is 0
+    const year = date.getFullYear();
+
+    return `${year}-${month}-${day}`;
+  }
+  
+  function isAgeGreaterThanToday(age) {
+    const date = new Date();
+    const formattedDate = formatDate(date);
+
+    if (age > formattedDate) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (!firstName || !lastName || !age || !email || !password || !confirmPassword || !province) {
       toast.error('Por favor, completa todos los campos.');
+      return;
+    }
+
+
+    if (isAgeGreaterThanToday(age)){
+      toast.error('Edad Invalida')
       return;
     }
 

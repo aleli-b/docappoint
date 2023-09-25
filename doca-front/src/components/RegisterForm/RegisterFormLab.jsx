@@ -80,11 +80,35 @@ export const RegisterFormLab = () => {
     setCategory(event.target.value);
   };
 
+  function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Adding 1 because January is 0
+    const year = date.getFullYear();
+
+    return `${year}-${month}-${day}`;
+  }
+
+  function isAgeGreaterThanToday(age) {
+    const date = new Date();
+    const formattedDate = formatDate(date);
+
+    if (age > formattedDate) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (!firstName || !lastName || !age || !email || !password || !confirmPassword || !category || !province) {
       toast.error('Por favor, completa todos los campos.');
+      return;
+    }
+
+    if (isAgeGreaterThanToday(age)) {
+      toast.error('Edad Invalida')
       return;
     }
 

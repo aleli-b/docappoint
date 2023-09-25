@@ -44,7 +44,7 @@ export const LabOrder = () => {
             textAlign: isMobile ? "center" : "left",
           }}
         >
-          Pedidos de Análisis
+          Cargando...
         </Typography>
         <Container sx={{ minHeight: '100dvh', display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
           <CircularProgress />

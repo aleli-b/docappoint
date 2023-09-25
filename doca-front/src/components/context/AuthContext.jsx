@@ -15,26 +15,12 @@ export const AuthProvider = ({ children }) => {
   const register = async (data) => {
     try {
       await axios.post(`${svHost}/users`, data);
-        const loginData = {
-          email: data.email,
-          password: data.password,
-          userType: data.userType,
-        };
-        toast.success("Creacion de usuario exitosa!", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        login(loginData, true);
-
-    } catch (error) {
-      if (error.tokenInvalid) logout();
-      toast.error("Ha habido un error, por favor intente mas tarde...", {
+      const loginData = {
+        email: data.email,
+        password: data.password,
+        userType: data.userType,
+      };
+      toast.success("Creacion de usuario exitosa!", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -44,61 +30,89 @@ export const AuthProvider = ({ children }) => {
         progress: undefined,
         theme: "light",
       });
+      login(loginData, true);
+
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      if (error.tokenInvalid) logout();
+      if (status === 401) {        
+        toast.error("Mail en uso...", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        toast.error("Ha habido un error, por favor intente mas tarde...", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
     }
   };
 
   const login = async (data, register) => {
     if (register === true) {
-        try {
-            const loginData = await axios.post(`${svHost}/login`, data);
-            localStorage.setItem("token", JSON.stringify(loginData.data.token));
-            localStorage.setItem("user", JSON.stringify(loginData.data.user));
-            toast.success("Redirigiendo a Planes.", {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
-            if(data.userType === 'patient'){
-              window.location.href = `/`;
-            } else {
-              setTimeout(() => {
-                window.location.href = `/plan/${data.userType}`;
-                setUser(loginData.data.user);
-                setToken(loginData.data.token);
-              }, 2000);
-            }
-          } catch (error) {
-            const status = error.response ? error.response.status : null;
-            if (error.tokenInvalid) logout();
-            if (status === 404) {
-              toast.error("Usuario o contraseña incorrectos.", {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-              });
-            } else {
-              toast.error("Ha habido un error.", {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-              });
-            }
-          }
+      try {
+        const loginData = await axios.post(`${svHost}/login`, data);
+        localStorage.setItem("token", JSON.stringify(loginData.data.token));
+        localStorage.setItem("user", JSON.stringify(loginData.data.user));
+        toast.success("Redirigiendo a Planes.", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        if (data.userType === 'patient') {
+          window.location.href = `/`;
+        } else {
+          setTimeout(() => {
+            window.location.href = `/plan/${data.userType}`;
+            setUser(loginData.data.user);
+            setToken(loginData.data.token);
+          }, 2000);
+        }
+      } catch (error) {
+        const status = error.response ? error.response.status : null;
+        if (error.tokenInvalid) logout();
+        if (status === 404) {
+          toast.error("Usuario o contraseña incorrectos.", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          toast.error("Ha habido un error.", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      }
     } else {
       try {
         const loginData = await axios.post(`${svHost}/login`, data);

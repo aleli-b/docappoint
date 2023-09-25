@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Box,
   Card,
-  CardContent,
   FormControl,
-  InputLabel,
   Link,
   MenuItem,
   Select,
@@ -55,14 +53,14 @@ export const Mensajeria = () => {
 
   const getTurnos = async () => {
     let turnoData;
-    if (user.userType === 'doctor'){
+    if (user.userType === 'doctor') {
       turnoData = await axios.post(`${svHost}/doctor-turnos`, { doctorId: user.id });
-    } else if (user.userType === 'patient'){
+    } else if (user.userType === 'patient') {
       turnoData = await axios.post(`${svHost}/user-turnos`, { userId: user.id });
     } else {
       turnoData = await axios.post(`${svHost}/lab-turnos`, { labId: user.id });
     }
-    if (user.userType === 'doctor'){
+    if (user.userType === 'doctor') {
       setUsers(turnoData.data);
     } else {
       setDoctors(turnoData.data)
@@ -171,10 +169,10 @@ export const Mensajeria = () => {
                     : users ?
                       users
                         .filter((user) => user.userType !== "lab")
-                        .map((user, i) => (
-                          <MenuItem key={user.paciente.id} value={user.paciente.id}>
-                            {user.paciente.userType === "doctor" && "Dr. "}
-                            {`${user.paciente.name} ${user.paciente.lastName}`}
+                        .map((patient, i) => (
+                          <MenuItem key={patient.paciente.id} value={patient.paciente.id} sx={{ display: patient.paciente.id === user.id ? 'none' : 'box'}}>
+                            {patient.paciente.userType === "doctor" && "Dr. "}
+                            {`${patient.paciente.name} ${patient.paciente.lastName}`}
                           </MenuItem>))
                       :
                       (<MenuItem disabled>
@@ -249,18 +247,6 @@ export const Mensajeria = () => {
                   onChange={handleChange}
                   label="asdasd"
                 >
-                  {/* {
-                    doctors.length > 0 ?
-                    doctors.map((doctor) => (
-                    <MenuItem
-                      key={user.userType === 'lab' ? doctor.id : doctor.doctor.id}
-                      value={user.userType === 'lab' ? doctor.id : doctor.doctor.id}
-                    >{`Dr. ${user.userType === 'lab' ? doctor.name : doctor.doctor.name} ${user.userType === 'lab' ? doctor.lastName : doctor.doctor.lastName}`}</MenuItem>
-                  ))
-                  :
-                  <MenuItem disabled>
-                    <Typography>No tienes turno con doctores</Typography>
-                  </MenuItem>} */}
                 </Select>
                 <TextField
                   label="Type your message"

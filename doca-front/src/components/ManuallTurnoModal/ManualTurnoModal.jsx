@@ -100,12 +100,23 @@ export const ManualTurnoModal = ({ openManualTurno, closeManualTurno }) => {
                     flexDirection: 'column',
                 }}
             >
-                <Typography>Agregue manualmente los días que tenga ocupados.</Typography>
+                <Typography>Agregue manualmente los días que tenga ocupados:</Typography>
 
-                <Box sx={{ display: 'flex', justifyContent: 'space-around', gap: 2 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-around', gap: 2, pt: 3 }}>
+                    <FormControl sx={{ minWidth: '120px',}}>
+                        <InputLabel>Mes</InputLabel>
+                        <Select value={selectedMonth} onChange={handleMonthChange} label='Mes'  >
+                            <MenuItem value="">Seleccionar mes</MenuItem>
+                            {months.map(month => (
+                                <MenuItem key={month.value} value={month.value}>
+                                    {month.label}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
                     <FormControl sx={{ minWidth: '75px' }}>
                         <InputLabel sx={{ color: selectedMonth ? '' : 'red' }}>Día</InputLabel>
-                        <Select value={selectedDay} onChange={(e) => setSelectedDay(e.target.value)} disabled={selectedMonth === ''} >
+                        <Select value={selectedDay} onChange={(e) => setSelectedDay(e.target.value)} disabled={selectedMonth === ''} label='Dia' >
                             <MenuItem value="">Seleccionar día</MenuItem>
                             {[...Array(months.find(month => month.value === selectedMonth)?.days).keys()].map(day => (
                                 <MenuItem key={day + 1} value={String(day + 1).padStart(2, '0')}>
@@ -115,19 +126,8 @@ export const ManualTurnoModal = ({ openManualTurno, closeManualTurno }) => {
                         </Select>
                     </FormControl>
                     <FormControl sx={{ minWidth: '120px' }}>
-                        <InputLabel>Mes</InputLabel>
-                        <Select value={selectedMonth} onChange={handleMonthChange}>
-                            <MenuItem value="">Seleccionar mes</MenuItem>
-                            {months.map(month => (
-                                <MenuItem key={month.value} value={month.value}>
-                                    {month.label}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                    <FormControl sx={{ minWidth: '120px' }}>
                         <InputLabel>Hora</InputLabel>
-                        <Select value={selectedHour} onChange={handleHourChange}>
+                        <Select value={selectedHour} onChange={handleHourChange} label='Hora'>
                             <MenuItem value="">Seleccionar hora</MenuItem>
                             {hours.map(hour => (
                                 <MenuItem key={hour} value={hour}>
@@ -138,7 +138,7 @@ export const ManualTurnoModal = ({ openManualTurno, closeManualTurno }) => {
                     </FormControl>
                     <FormControl sx={{ minWidth: '120px' }}>
                         <InputLabel>Minuto</InputLabel>
-                        <Select value={selectedMinute} onChange={handleMinuteChange}>
+                        <Select value={selectedMinute} onChange={handleMinuteChange} label='Minuto'>
                             <MenuItem value="">Seleccionar minuto</MenuItem>
                             {minutes.map(minute => (
                                 <MenuItem key={minute} value={minute}>
