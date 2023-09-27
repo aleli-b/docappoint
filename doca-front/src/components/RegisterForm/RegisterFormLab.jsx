@@ -108,7 +108,7 @@ export const RegisterFormLab = () => {
     }
 
     if (isAgeGreaterThanToday(age)) {
-      toast.error('Edad Invalida')
+      toast.error('Fecha de Nacimiento Invalida')
       return;
     }
 

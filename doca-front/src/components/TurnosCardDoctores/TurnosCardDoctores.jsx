@@ -46,7 +46,7 @@ export const TurnosCardDoctores = ({ isSubscribed, isVerified, }) => {
           <Typography variant="h6" component="div">
             Turnos Reservados
           </Typography>
-          <Button onClick={handleOpen} disabled={!isSubscribed && !isVerified}>
+          <Button onClick={handleOpen} disabled={!isSubscribed || !isVerified}>
             Agregar Turno
           </Button>
         </Box>
