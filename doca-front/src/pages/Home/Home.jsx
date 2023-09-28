@@ -33,6 +33,7 @@ export const Home = () => {
             alignItems: "center",
             justifyContent: "center",
             minHeight: "100vh",
+            minWidth: '100%',
             gap: isMobile ? 7 : 10,
           }}
         >
@@ -43,12 +44,13 @@ export const Home = () => {
               flexDirection: isMobile ? "column" : "row",
               width: "100%",
               aligItems: "center",
+              justifyContent: 'center',
             }}
           >
-            <Box
+            {/* <Box
               className="leftContainer"
               sx={{ width: "100%", display: "flex", justifyContent: "center" }}
-            ></Box>
+            ></Box> */}
             <Box
               className="rigthContainer"
               sx={{
@@ -136,17 +138,18 @@ export const Home = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              width: "98%",
+              flexGrow: 1,
+              minWidth: "100%",
               bgcolor: "#145C6C",
               borderRadius: "1.25rem",
-              p: 2,
+              py: 2,
               textAlign: "center",
             }}
           >
             <Typography
               sx={{
                 color: "white",
-                fontSize: "2rem",
+                fontSize: "2.5rem",
                 fontWeight: "700",
                 lineHeight: isMobile ? 1 : "",
                 fontFamily: "work sans",
@@ -171,12 +174,13 @@ export const Home = () => {
                   flexWrap: "nowrap",
                   justifyContent: "space-evenly",
                   mt: isMobile ? "" : 4,
+                  gap: 1,
                 }}
               >
                 <Typography
                   sx={{
                     color: "white",
-                    width: isMobile ? "" : "16.6vw",
+                    fontSize: isMobile ? "20px" : "20px",
                     fontFamily: "work sans",
                     fontWeight: "bold",
                   }}
@@ -186,7 +190,7 @@ export const Home = () => {
                 <Typography
                   sx={{
                     color: "white",
-                    width: isMobile ? "" : "16.6vw",
+                    fontSize: isMobile ? "20px" : "20px",
                     fontFamily: "work sans",
                     fontWeight: "bold",
                   }}
@@ -196,7 +200,7 @@ export const Home = () => {
                 <Typography
                   sx={{
                     color: "white",
-                    width: isMobile ? "" : "16.6vw",
+                    fontSize: isMobile ? "20px" : "20px",
                     fontFamily: "work sans",
                     fontWeight: "bold",
                   }}
@@ -206,7 +210,7 @@ export const Home = () => {
                 <Typography
                   sx={{
                     color: "white",
-                    width: isMobile ? "" : "16.6vw",
+                    fontSize: isMobile ? "20px" : "20px",
                     fontFamily: "work sans",
                     fontWeight: "bold",
                   }}
@@ -216,7 +220,7 @@ export const Home = () => {
                 <Typography
                   sx={{
                     color: "white",
-                    width: isMobile ? "" : "16.6vw",
+                    fontSize: isMobile ? "20px" : "20px",
                     fontFamily: "work sans",
                     fontWeight: "bold",
                   }}
@@ -226,7 +230,7 @@ export const Home = () => {
                 <Typography
                   sx={{
                     color: "white",
-                    width: isMobile ? "" : "16.6vw",
+                    fontSize: isMobile ? "20px" : "20px",
                     fontFamily: "work sans",
                     fontWeight: "bold",
                   }}
@@ -240,12 +244,13 @@ export const Home = () => {
                   flexDirection: isMobile ? "column" : "row",
                   flexWrap: "nowrap",
                   justifyContent: "space-evenly",
+                  gap: 5,
                 }}
               >
                 <Typography
                   sx={{
                     color: "white",
-                    width: isMobile ? "" : "16.6vw",
+                    fontSize: isMobile ? "20px" : "20px",
                     fontFamily: "work sans",
                     fontWeight: "bold",
                   }}
@@ -255,7 +260,7 @@ export const Home = () => {
                 <Typography
                   sx={{
                     color: "white",
-                    width: isMobile ? "" : "16.6vw",
+                    fontSize: isMobile ? "20px" : "20px",
                     fontFamily: "work sans",
                     fontWeight: "bold",
                   }}
@@ -265,7 +270,7 @@ export const Home = () => {
                 <Typography
                   sx={{
                     color: "white",
-                    width: isMobile ? "" : "16.6vw",
+                    fontSize: isMobile ? "20px" : "20px",
                     fontFamily: "work sans",
                     fontWeight: "bold",
                   }}
@@ -275,7 +280,7 @@ export const Home = () => {
                 <Typography
                   sx={{
                     color: "white",
-                    width: isMobile ? "" : "16.6vw",
+                    fontSize: isMobile ? "20px" : "20px",
                     fontFamily: "work sans",
                     fontWeight: "bold",
                   }}
@@ -285,7 +290,7 @@ export const Home = () => {
                 <Typography
                   sx={{
                     color: "white",
-                    width: isMobile ? "" : "16.6vw",
+                    fontSize: isMobile ? "20px" : "20px",
                     fontFamily: "work sans",
                     fontWeight: "bold",
                   }}
@@ -295,7 +300,7 @@ export const Home = () => {
                 <Typography
                   sx={{
                     color: "white",
-                    width: isMobile ? "" : "16.6vw",
+                    fontSize: isMobile ? "20px" : "20px",
                     fontFamily: "work sans",
                     fontWeight: "bold",
                   }}
@@ -308,7 +313,7 @@ export const Home = () => {
           <Typography
             sx={{
               color: "#145C6C",
-              fontSize: "2rem",
+              fontSize: "2.5rem",
               fontFamily: "work sans",
               fontWeight: "bold",
             }}
@@ -317,10 +322,11 @@ export const Home = () => {
           </Typography>
           <Container
             sx={{
-              width: "98%",
-              height: isMobile ? "auto" : "23rem",
+              // width: "100%",
+              // height: isMobile ? "auto" : "23rem",
               bgcolor: "rgba(131, 131, 131, 0.33)",
               display: "flex",
+              minWidth: "100%",
               flexDirection: isMobile ? "column" : "row",
               justifyContent: "space-around",
               alignItems: isMobile ? "center" : "",
@@ -334,15 +340,18 @@ export const Home = () => {
               sx={{
                 display: "flex",
                 flexDirection: "column",
+                alignItems: 'center',
                 p: 4,
                 bgcolor: "rgba(20, 92, 108, 0.60)",
                 borderRadius: 5,
-                width: "17rem",
+                width: isMobile ? "50%" : "20dvw",
+                minHeight: "500px",
               }}
             >
               <SvgIcon
                 sx={{
-                  width: "100%",
+                  width: "70px",
+                  height: "70px",
                   display: "flex",
                   justifyContent: "center",
                   fontSize: "2.5rem",
@@ -367,17 +376,17 @@ export const Home = () => {
                     width: "100%",
                     display: "flex",
                     flexDirection: "row",
-                    justifyContent: "flex-start",
-                    alignContent: "center",
+                    justifyContent: "flex-star",
                     gap: 1,
                   }}
                 >
                   <FiberManualRecordIcon
-                    sx={{ fontSize: "0.8rem", color: "#145C6C" }}
+                    sx={{ fontSize: "0.8rem", color: "#145C6C", marginTop: 1.5, }}
                   />
 
                   <Typography
                     sx={{
+                      fontSize: "1.6rem",
                       fontFamily: "work sans",
                       fontWeight: "bold",
                       color: "#145C6C",
@@ -396,11 +405,12 @@ export const Home = () => {
                   }}
                 >
                   <FiberManualRecordIcon
-                    sx={{ fontSize: "0.8rem", color: "#145C6C" }}
+                    sx={{ fontSize: "0.8rem", color: "#145C6C", marginTop: 1.5, }}
                   />
 
                   <Typography
                     sx={{
+                      fontSize: "1.6rem",
                       fontFamily: "work sans",
                       fontWeight: "bold",
                       color: "#145C6C",
@@ -415,16 +425,19 @@ export const Home = () => {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "flex-start",
+                justifyContent: "center",
+                alignItems: "center",
                 p: 4,
                 bgcolor: "rgba(20, 92, 108, 0.60)",
                 borderRadius: 5,
-                width: "17rem",
+                width: isMobile ? "50%" : "20dvw",
+                minHeight: "500px",
               }}
             >
               <SvgIcon
                 sx={{
-                  width: "100%",
+                  width: "70px",
+                  height: "70px",
                   display: "flex",
                   justifyContent: "center",
                   fontSize: "2.5rem",
@@ -456,11 +469,12 @@ export const Home = () => {
                   }}
                 >
                   <FiberManualRecordIcon
-                    sx={{ fontSize: "0.8rem", color: "#145C6C" }}
+                    sx={{ fontSize: "0.8rem", color: "#145C6C", marginTop: 1.5, }}
                   />
 
                   <Typography
                     sx={{
+                      fontSize: "1.6rem",
                       fontFamily: "work sans",
                       fontWeight: "bold",
                       color: "#145C6C",
@@ -479,11 +493,12 @@ export const Home = () => {
                   }}
                 >
                   <FiberManualRecordIcon
-                    sx={{ fontSize: "0.8rem", color: "#145C6C" }}
+                    sx={{ fontSize: "0.8rem", color: "#145C6C", marginTop: 1.5, }}
                   />
 
                   <Typography
                     sx={{
+                      fontSize: "1.6rem",
                       fontFamily: "work sans",
                       fontWeight: "bold",
                       color: "#145C6C",
@@ -502,11 +517,12 @@ export const Home = () => {
                   }}
                 >
                   <FiberManualRecordIcon
-                    sx={{ fontSize: "0.8rem", color: "#145C6C" }}
+                    sx={{ fontSize: "0.8rem", color: "#145C6C", marginTop: 1.5, }}
                   />
 
                   <Typography
                     sx={{
+                      fontSize: "1.6rem",
                       fontFamily: "work sans",
                       fontWeight: "bold",
                       color: "#145C6C",
@@ -525,11 +541,12 @@ export const Home = () => {
                   }}
                 >
                   <FiberManualRecordIcon
-                    sx={{ fontSize: "0.8rem", color: "#145C6C" }}
+                    sx={{ fontSize: "0.8rem", color: "#145C6C", marginTop: 1.5, }}
                   />
 
                   <Typography
                     sx={{
+                      fontSize: "1.6rem",
                       fontFamily: "work sans",
                       fontWeight: "bold",
                       color: "#145C6C",
@@ -545,15 +562,18 @@ export const Home = () => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-start",
+                alignItems: "center",
                 p: 4,
                 bgcolor: "rgba(20, 92, 108, 0.60)",
                 borderRadius: 5,
-                width: "17rem",
+                width: isMobile ? "50%" : "20dvw",
+                minHeight: "500px",
               }}
             >
               <SvgIcon
                 sx={{
-                  width: "100%",
+                  width: "70px",
+                  height: "70px",
                   display: "flex",
                   justifyContent: "center",
                   fontSize: "2.5rem",
@@ -561,9 +581,9 @@ export const Home = () => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="54"
-                  height="52"
-                  viewBox="0 0 54 52"
+                  width="70"
+                  height="70"
+                  viewBox="0 0 70 70"
                   fill="none"
                 >
                   <path
@@ -588,11 +608,12 @@ export const Home = () => {
                   }}
                 >
                   <FiberManualRecordIcon
-                    sx={{ fontSize: "0.8rem", color: "#145C6C" }}
+                    sx={{ fontSize: "0.8rem", color: "#145C6C", marginTop: 1.5, }}
                   />
 
                   <Typography
                     sx={{
+                      fontSize: "1.6rem",
                       fontFamily: "work sans",
                       fontWeight: "bold",
                       color: "#145C6C",
@@ -611,11 +632,12 @@ export const Home = () => {
                   }}
                 >
                   <FiberManualRecordIcon
-                    sx={{ fontSize: "0.8rem", color: "#145C6C" }}
+                    sx={{ fontSize: "0.8rem", color: "#145C6C", marginTop: 1.5, }}
                   />
 
                   <Typography
                     sx={{
+                      fontSize: "1.6rem",
                       fontFamily: "work sans",
                       fontWeight: "bold",
                       color: "#145C6C",
@@ -634,11 +656,12 @@ export const Home = () => {
                   }}
                 >
                   <FiberManualRecordIcon
-                    sx={{ fontSize: "0.8rem", color: "#145C6C" }}
+                    sx={{ fontSize: "0.8rem", color: "#145C6C", marginTop: 1.5, }}
                   />
 
                   <Typography
                     sx={{
+                      fontSize: "1.6rem",
                       fontFamily: "work sans",
                       fontWeight: "bold",
                       color: "#145C6C",
@@ -653,20 +676,21 @@ export const Home = () => {
           <Box
             className="laboratorios"
             sx={{
-              //display: "flex",
+              display: "flex",
               justifyContent: "center",
               flexDirection: "column",
               width: "100%",
               gap: 4,
-              display: "none",
+              // display: "none",
             }}
           >
             <Typography
               sx={{
                 color: "#145C6C",
-                fontSize: "2rem",
-                fontWeight: "700",
-                textAlign: "center",
+                fontSize: "2.5rem",
+                fontFamily: "work sans",
+                fontWeight: "bold",
+                textAlign: 'center',
               }}
             >
               Nuestros laboratorios
