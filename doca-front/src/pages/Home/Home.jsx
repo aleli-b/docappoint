@@ -18,7 +18,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import Banner from "../../assets/Banner.png";
-import "./Home.css";
+import "./Home.css"
 
 export const Home = () => {
   const isMobile = useMediaQuery("(max-width:900px)");

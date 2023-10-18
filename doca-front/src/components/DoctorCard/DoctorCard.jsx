@@ -156,7 +156,7 @@ export const DoctorCard = ({ doctor, turnos }) => {
           <Typography variant="h5">Dirección/es</Typography>
           <Box sx={{ display: "flex", gap: 1 }}>
             <AddLocationIcon />
-            <Typography>{`${doc.state}, ${doc.country}`} </Typography>
+            <Typography>{doc.adress ? `${doc.adress}` : `${doc.state}, ${doc.country}`} </Typography>
             {/* <Typography>
               {doc.addres? doc.addres : "(No se proporcionó una direccion)"}
             </Typography> */}

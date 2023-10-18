@@ -6,9 +6,11 @@ export const EditModal = ({ field, open, onClose, onSave, newValue, setNewValue 
     if (field === 'description') {
         MAX_CHARACTERS = 50;
     } else if (field === 'phone') {
-        MAX_CHARACTERS = 12; // Allow up to 12 characters for formatted phone number (xxx-xxx-xxxx)
+        MAX_CHARACTERS = 12;
     } else if (field === "clabe") {
         MAX_CHARACTERS = 18;
+    } else if (field === "adress") {
+        MAX_CHARACTERS = 30;
     } else {
         MAX_CHARACTERS = 5;
     }

@@ -1,9 +1,11 @@
-import { createBrowserRouter, Route, RouterProvider, Routes, useLocation } from "react-router-dom";
 import './App.css'
-import { AuthProvider } from "./components/context/AuthContext";
+import { createBrowserRouter, Route, RouterProvider, Routes, useLocation } from "react-router-dom";
+import { createTheme, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
+import { AuthProvider } from "./components/context/AuthContext";
 import { MessageProvider } from './components/context/MessageContext.jsx';
 import { Home } from "./pages/Home/Home";
+import { Home2 } from "./pages/Home/Home2";
 import { Header } from "./layout/Header/Header";
 import { Footer } from "./layout/Footer/Footer";
 import { Login } from "./pages/Login/Login";
@@ -14,7 +16,6 @@ import { PerfilDoctores } from "./pages/Perfil/PerfilDoctores/PerfilDoctores";
 import { PerfilPacientes } from "./pages/Perfil/PerfilPacientes/PerfilPacientes";
 import { PerfilLaboratorios } from "./pages/Perfil/PerfilLaboratorios/PerfilLaboratorios";
 import { ProfileRoute } from "./components/guard/ProfileRoute";
-import { createTheme, CssBaseline } from "@mui/material";
 import { Turnos } from "./pages/Turnos/Turnos";
 import { Register } from "./pages/Register/Register";
 import { AdminRoute } from "./components/guard/AdminRoute";
@@ -70,6 +71,7 @@ function Root() {
             <Routes>
               <Route path="*" element={<Error />} />
               <Route path="/antoHome" element={<Home />} />
+              <Route path="/home" element={<Home2 />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register-paciente" element={<RegRoute> <Register /> </RegRoute>} />
               <Route path="/register-doctor" element={<RegRoute> <RegisterDoctor /> </RegRoute>} />

@@ -274,6 +274,7 @@ export const PerfilDoctores = () => {
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
+                  borderBottom: "solid gray 1px",
                   padding: "18.7px",
                 }}
               >
@@ -284,6 +285,27 @@ export const PerfilDoctores = () => {
                     onClick={() => {
                       setFieldToEdit("bank");
                       setNewValue(user.bank || "");
+                      setEditing(true);
+                    }}
+                  >
+                    <EditIcon />
+                  </Button>
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "18.7px",
+                }}
+              >
+                <Typography>Dirección:</Typography>
+                <Box>
+                  {user.adress ? user.adress : "No has añadido una dirección aún"}
+                  <Button
+                    onClick={() => {
+                      setFieldToEdit("adress");
+                      setNewValue(user.adress || "");
                       setEditing(true);
                     }}
                   >
