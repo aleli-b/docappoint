@@ -138,7 +138,7 @@ export const Plan = () => {
                 pr: 2,
               }}
             >
-              SÓLO POR SEPTIEMBRE
+              SÓLO POR NOVIEMBRE
             </Typography>
           </Box>
           <Box
@@ -178,7 +178,7 @@ export const Plan = () => {
             >
               {"12 MESES + MES DE "}
               {<br />}
-              {"SEPTIEMBRE GRATIS"}
+              {"NOVIEMBRE GRATIS"}
             </Typography>
             <Box
               sx={{
@@ -245,7 +245,7 @@ export const Plan = () => {
                 pr: 2,
               }}
             >
-              SÓLO POR SEPTIEMBRE
+              SÓLO POR NOVIEMBRE
             </Typography>
           </Box>
           <Box
@@ -285,7 +285,7 @@ export const Plan = () => {
             >
               {"OCTUBRE + NOVIEMBRE "}
               {<br />}
-              {"+ MES DE SEPTIEMBRE GRATIS"}
+              {"+ MES DE DICIEMBRE GRATIS"}
             </Typography>
 
             <Box
@@ -353,7 +353,7 @@ export const Plan = () => {
                 pr: 2,
               }}
             >
-              SÓLO POR SEPTIEMBRE
+              SÓLO POR NOVIEMBRE
             </Typography>
           </Box>
           <Box

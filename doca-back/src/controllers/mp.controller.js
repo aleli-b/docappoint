@@ -6,7 +6,6 @@ const { User } = require("../db");
 const axios = require("axios");
 const { setPago, sendEmailNotification } = require("../controllers/pagos.controller");
 const { setSubscriptions } = require("./subscription.controller");
-
 const MpAccessToken = process.env.MpAccessToken;
 mercadopago.configure({
   access_token: MpAccessToken,

@@ -100,10 +100,8 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM(
           "Anestesiología",
           "Cardiología",
-          "Cardiología",
           "Cirugía",
           "Dermatología",
-          "Endocrinología",
           "Endocrinología",
           "Gastroenterología",
           "Gineco obstetricia",
