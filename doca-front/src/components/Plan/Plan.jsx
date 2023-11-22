@@ -283,9 +283,9 @@ export const Plan = () => {
               }}
               variant="body1"
             >
-              {"OCTUBRE + NOVIEMBRE "}
+              {"NOVIEMBRE + DICIEMBRE "}
               {<br />}
-              {"+ MES DE DICIEMBRE GRATIS"}
+              {"+ MES DE ENERO GRATIS"}
             </Typography>
 
             <Box
