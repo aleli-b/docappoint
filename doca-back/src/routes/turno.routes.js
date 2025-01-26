@@ -13,4 +13,6 @@ router.post('/doctor-turnos', /* jwtVerify, */ turnoController.getDoctorTurno)
 
 router.post('/lab-turnos', /* jwtVerify, */ turnoController.getLabTurno)
 
+router.post('/turno', /* jwtVerify, */ turnoController.addTurno)
+
 module.exports = router;

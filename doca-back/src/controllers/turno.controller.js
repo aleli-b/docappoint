@@ -16,8 +16,8 @@ async function getOccupiedTurnos(req, res) {
   }
 }
 
-async function addTurno(userData) {
-  const { date, userId, doctorId, labId, type } = userData;  
+async function addTurno(req, res) {
+  const { date, userId, doctorId, labId, type } = req.body;
   console.log(date, userId, doctorId, labId, type)
   try {
     const pacienteHasTurno = await Turno.findOne({
@@ -50,8 +50,9 @@ async function addTurno(userData) {
     //   console.log("The User already has a turno");
     //   return ("The User already has a turno");
     // }
+    let turnoDate = '26 Jan 2025'
 
-    const turno = await Turno.create({ date, userId, doctorId, labId, type });
+    const turno = await Turno.create({ date: turnoDate, userId, doctorId, labId, type });
     return (turno.id);
   } catch (error) {
     console.error(error);

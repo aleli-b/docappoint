@@ -29,22 +29,15 @@ export function TurnoCheckOut({ doctor, turno, type, }) {
   const mpKey = import.meta.env.VITE_MP_KEY;
   initMercadoPago(mpKey);
 
+  let doctorId = doctor.id;
+  let userId = user.id;
+
   const createPreference = async () => {
-    event.preventDefault();
     axios
       .post(
-        `${svHost}/mpcheckout`,
-        { doctor, user, turno, type, },
+        `${svHost}/turno`,
+        { doctorId, userId, turno, type, },
         { headers: { authorization: token } }
-      )
-      .then(
-        sessionStorage.clear()
-      )
-      .then(
-        (response) =>
-          (window.location.href = response.data.response.body.init_point
-            ? response.data.response.body.init_point
-            : "error de id")
       )
       .catch((error) => {
         console.error(error);
